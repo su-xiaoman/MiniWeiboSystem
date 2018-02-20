@@ -3,7 +3,7 @@
 ## 基本说明 ##
 * 这个项目用来展示怎样用__Django__建立一个基本的微博系统，因此我称它MiniWeiboSystem
 * 整体采用更大型的三层架构， 分离接口和实现
-* 使用的平台和工具包括： **Linux+Django+uwsgi+Nginx+Mysql** 
+* 使用的平台和工具包括： **Linux+Django+uwsgi+Nginx+Redis+RabbitMQ+Mysql** 
 * 插件包括：**JQuery+Bootstrap+Font-Awesome。**
 * 实现过程：基于B/S架构,结合数据库与服务器，交互前端和后端。
 > 关于相关的配置和说明参考,点击：[Django在Linux上的部署的相关说明](https://github.com/lyamango/DeployDjangoOnLinux)
