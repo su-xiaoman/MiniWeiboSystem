@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="微博,中国Twitter">
+    <meta name="description" content="微博是新浪旗下最大的SNS社交服务平台">
+    <title>我的首页 微博-随时随地发现新鲜事</title>
+
+    <link rel="shortcut icon" href="/static/img/about_UI/favicon.ico" />
+    <link rel="bookmark" href="/static/img/about_UI/favicon.ico" type="image/x-icon"/>
+
+    <link rel="stylesheet" href="/static/css/top_info.css">
+    <link rel="stylesheet" href="/static/css/head_band.css">
+    <link rel="stylesheet" href="/static/css/threePart.css">
+
+    <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
+    <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
+    <script type="text/javascript" src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+    <style type="text/css">
+
+        @font-face {
+            font-family: "MyNewFont",serif;
+            src: url("/static/fonts/Awesome-fonts/苹方黑体-中黑-简.ttf");
+        }
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        body{
+            background-image: url("/static/img/about_UI/skin.png");
+            background-size:1366px auto;
+            font-family: "MyNewFont","Arial","Microsoft YaHei",serif;
+        }
+        .clearfix:after{
+            content: '.';
+            clear: both;
+            display: block;
+            visibility: hidden;
+            height: 0;
+        }
+
+        i{
+            padding-right: 3px;
+        }
+        #p1{
+            margin-top: 10px;
+            margin-left: 12px;
+            color: cornflowerblue;
+        }
+    </style>
+</head>
+<body>
+
+
+
+    <!-- 头部仿汽车之家的顶部信息栏 -->
+    <div class="top_info clearfix">
+    <div class="locate">
+    </div>
+    <div class="c0">
+        <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
+        <span class="c2">切换 <i class="caret"></i></span>
+    </div>
+    <div class="login_register">
+        <span class="c3" >您好!请</span>
+        <span class="c5" data-toggle="modal" data-target=".bs-example-modal-lg1">登录</span>
+        <span class="c3">或</span>
+        <a class="c5" href="/register/">注册</a>
+    </div>
+</div>
+    <!--此为第二行的菜单栏说明-->
+    <div class="head_band clearfix">
+        <!--此为新浪logo-->
+        <div class="logo"></div>
+
+        <!--此处就有form表单或者ajax-->
+        <div class="search">
+
+            <input type="text" placeholder="大家正在搜:为什么毕业答辩要等到六月份" name="condition"/>
+            <button type="submit" class="fa fa-search fa-2x"></button>
+
+        </div>
+
+        <!--此为几个主要菜单栏-->
+        <div class="main_menu">
+            <div class="linkPage">
+                <a href="javascript:void(0);"><i class="fa fa-home fa-2x"></i>&nbsp;首页</a>
+                <a href="javascript:void(0);"><i class="fa fa-youtube-play fa-2x"></i>&nbsp;视频</a>
+                <a href="javascript:void(0);"><i class="fa fa-compass fa-2x fa-fw"></i>&nbsp;发现</a>
+                <a href="javascript:void(0);"><i class="fa fa-gamepad fa-2x fa-fw"></i>&nbsp;游戏</a>
+            </div>
+
+            <div class="myfunction">
+                <div class="dropdown">
+                  <i class="fa fa-envelope-o fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li>功能1</li>
+                    <li>功能2</li>
+                  </ul>
+                </div>
+
+                <div class="dropdown">
+                  <i class="fa fa-cog fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                  <ul class="dropdown-menu" aria-labelledby="dLabel">
+                    <li>功能3</li>
+                    <li>功能4</li>
+                  </ul>
+                </div>
+                <div class="fa fa-wrench fa-2x"></div>
+
+            </div>
+
+        </div>
+
+</div>
+
+    <div class="threePart clearfix">
+        <div class="bigMenu clearfix" >
+            <div class="list-group">
+                <a class="list-group-item" href="javascript:void(0);">主页</a>
+                <a class="list-group-item" href="javascript:void(0);">我的收藏</a>
+                <a class="list-group-item" href="javascript:void(0);">我的赞</a>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-fire" style="margin-right:3px; "></i>热门微博</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-film"></i>热门视频</a>
+            </div>
+            <div class="list-group">
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-heart"></i>特别关注</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>同事</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>同学</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>媒体</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>体育</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>事业</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-user-o"></i>群微博</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-leaf"></i>悄悄关注</a>
+            </div>
+        </div>
+        <div class="second clearfix">
+            <div class="post clearfix">
+                <p id="p1">有什么新鲜事想告诉大家?</p>
+                <input type="text"
+                        style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;"
+                        name="" placeholder="Want to say something??"/>
+                <div class="c1">
+                    <i class="fa fa-plus-square fa-2x"></i>表情
+                </div>
+                <div class="c2">
+                    <i class="fa fa-photo fa-2x"></i>图片
+                </div>
+                <div class="c3">
+                    <i class="fa fa-film fa-2x"></i>视频
+                </div>
+                <div class="c4">
+                    <i class="fa fa-hashtag fa-2x"></i>话题
+                </div>
+                <div class="c5">
+                    <i class="fa fa-star fa-2x"></i>头条文章
+                </div>
+                <div class="c6">
+                    <div class="dropdown">
+                      <i class="fa fa-bars fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <ul class="dropdown-menu" aria-labelledby="dLabel">
+                        <li>点评</li>
+                        <li>直播</li>
+                      </ul>
+                    </div>
+                </div>
+                <div class="c7">
+                    <button onclick="PostMessage();">发布</button>
+                </div>
+            </div>
+
+            <div class="messageShow  clearfix">
+                <!--从数据库中拿到数据,按照某种规则拜访,加上相关样式-->
+                {% for item in detail_list %}
+                    <div class="show1">
+                        <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
+                        <div class="briefShow">
+                            <img src="/{{item.user__head_img}}"
+                                    alt="..."
+                                        style="float: left;width: 50px;height: 50px;border-radius:26px;border: 1px solid grey;"
+                                            class="img-rounded">
+                            <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ item.user__username}}</p>
+                            <p style="margin-left: 60px;">{{ item.date }}</p>
+                        </div>
+                        <div class="textShow">
+                             <p style="margin-left: 21px;">{{ item.text }}</p>
+                        </div>
+                        <div class="commentCol">
+                            <dd><i class="fa fa-star-o"></i>收藏</dd>
+                            <dd><i class="fa fa-comment-o"></i></dd>
+                            <dd><i class="fa fa-share-alt"></i></dd>
+                            <dd><i class="fa fa-thumbs-o-up"></i></dd>
+                        </div>
+
+                    </div>
+                {% endfor%}
+
+            </div>
+
+
+
+
+      </div>
+        <div class="more clearfix">
+            <div class="personal clearfix">
+                {% for item in user_list %}
+                <div class="personal_photo">
+                    <img src="/{{item.head_img}}"
+                        class="img-rounded"
+                            style="float:left;width: 60px;height: 60px;border-radius:26px;position:relative;left:87px;top:35px;border: 1px solid white;">
+                </div>
+                <div class="personal_detail">
+
+                    <div class="logined_user">{{ item.username}}</div>
+
+                    <div class="follows_fans">
+                        <dl >
+                            <dt>{{follows.follows}}</dt>
+                            <dd>关注</dd>
+                        </dl>
+                        <dl>
+                            <dt>{{fans_num}}</dt>
+                            <dd>粉丝</dd>
+                        </dl>
+                        <dl style="border: none;">
+                            <dt>{{weibo_num.weibo_num}}</dt>
+                            <dd>微博</dd>
+                        </dl>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+            <div class="topicList">
+                <div class="hotTopic">
+                    <span style="float: left">热门话题</span>
+                    <span style="float: right"><i class="fa fa-refresh"></i>换一换</span>
+                </div>
+                <div class="topicShow">
+                    <ul>
+                        {% for item in topic_info %}
+                        <li class="clearfix" style="list-style: none;">
+                            <span style="padding-left:12px;float: left;padding-bottom: 4px;padding-top: 4px;">{{item.name}}</span>
+                            <span style="float: right">{{item.readers}}</span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div style="width: 233px;height: 48px;border-top: 1px solid grey;">
+                    <span style="line-height: 48px;margin-left: 66px;">查看更多<i class="fa fa-angle-right"></i></span>
+                </div>
+            </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <script type="text/javascript">
+
+
+        function PreviewFile(ths){
+			 var reader = new FileReader();
+
+             reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                $("#image").attr('src',e.target.result);
+             };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(ths.files[0]);
+		}
+
+		function PostMessage(ths) {
+		  
+		}
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+.head_band{
+    display: block;
+    width: 1366px;
+    height: 46px;
+    background-color:white;
+    /*margin-top: 25px;*/
+    position: fixed;
+    top: 25px;
+    z-index: 99;
+    /*border: 1px solid red;*/
+}
+.logo{
+    float: left;
+    display: block;
+    width: 140px;
+    height: 46px;
+    margin-left: 50px;
+    background: url("/static/img/about_UI/WB_logo.png") no-repeat ;
+    background-size:80% 80% ;
+    background-position:0 3px ;
+
+    /*border: 1px red solid;*/
+    /*z-index: 99;*/
+}
+.head_band .logo a{
+    height: 44px;
+    width: 44px;
+}
+
+
+.search{
+    float: left;
+    /*border: 1px red solid ;*/
+    padding-top: 3px;
+    margin-left: 40px;
+    height: 46px;
+}
+.search input{
+    float: left;
+    width: 480px;
+    height: 38px;
+    font-size: 12px;
+}
+
+.search .fa,.fa-search{
+    float: left;
+    width: 35px;
+    height: 36px;
+    background-color: white;
+    border: none;
+    position: relative;
+    left: -36px;
+    top: 1px;
+
+}
+
+
+
+.main_menu{
+    float: left;
+    display: block;
+    width: 576px;
+    height: 46px;
+    /*border: 1px red solid;*/
+    padding: 3px;
+    margin-left: 30px;
+}
+
+.main_menu .linkPage{
+    float: left;
+    display: block;
+
+    /*border: 1px red solid;*/
+}
+
+.main_menu .linkPage a{
+    /*float: left;*/
+    text-decoration: none;
+    color:grey;
+    margin: 0 10px;
+    line-height: 46px;
+}
+
+.main_menu .myfunction{
+    float: left;
+    display: block;
+    margin-left: 10px;
+    line-height: 46px;
+    border-left: 1px darkgrey dashed;
+}
+.main_menu .myfunction .dropdown{
+    float: left;
+    margin-left: 15px;
+    margin-right: 25px;
+}
+.main_menu .myfunction fa,fa-wrench{
+    float: left;
+}
+
+
+

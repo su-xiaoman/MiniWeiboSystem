@@ -1,0 +1,46 @@
+.top_info{
+
+    display: block;
+    height: 25px;
+    width: 1366px;
+    background-color: #2b2b2b;
+    /*border: 1px solid red;*/
+    font-size: 12px;
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    /*left: 0;*/
+}
+.top_info .c0{
+    float: left;
+}
+.top_info .c1{
+    color: orangered;
+    line-height: 25px;
+    margin-left: 50px;
+}
+.top_info .c2{
+    color: aliceblue;
+    line-height: 25px;
+    margin-left: 5px;
+}
+
+.top_info .login_register{
+    float: right;
+    /*border: 1px red solid;*/
+    margin-right: 340px;
+}
+.top_info .c3{
+    float: left;
+    color:grey;
+    /*color: aliceblue;*/
+    line-height: 25px;
+    margin:0 5px;
+}
+.top_info .c5{
+    float: left;
+    color:aliceblue;
+    line-height: 25px;
+    cursor: pointer;
+    /*margin-right: 300px;*/
+}

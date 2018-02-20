@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" id="viewport" name="viewport">
+<title></title>
+<script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    var countdown=3;
+    function settime(obj) {
+    if (countdown == 0) {
+        obj.removeAttribute("disabled");
+        obj.value="免费获取验证码";
+        countdown = 3;
+        return;
+    } else {
+        obj.setAttribute("disabled", true);
+        obj.value="重新发送(" + countdown + ")";
+        countdown--;
+    }
+    setTimeout(function() {
+    settime(obj) }
+    ,1000)
+    }
+</script>
+<body>
+<input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" />
+</body>
+</html>
