@@ -1,7 +1,7 @@
 # SNSWeiboSystem #
 	A project that shows how to build a WeiboSystem with Django
 ## 基本说明 ##
-* 这个项目用来展示怎样用__Django__建立一个基本的微博系统，因此我称它MiniWeiboSystem
+* 这个项目用来展示怎样用**Django**建立一个基本的微博系统，因此我称它MiniWeiboSystem
 * 整体采用更大型的三层架构， 分离接口和实现
 * 使用的平台和工具包括： **Linux+Django+uwsgi+Nginx+Redis+RabbitMQ+Mysql** 
 * 插件包括：**JQuery+Bootstrap+Font-Awesome。**
