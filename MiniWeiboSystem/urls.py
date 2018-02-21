@@ -32,5 +32,6 @@ urlpatterns = [
     path('login/',views.login),
     path('register/',views.register),
     path('send_code/',views.send_code),
+    path('check_img_code/',views.check_img_code),
     path('messageShow/',views.messageShow),
 ]

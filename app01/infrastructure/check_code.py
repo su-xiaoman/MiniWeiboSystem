@@ -4,24 +4,26 @@
 import random
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-_letter_cases = "abcdefghijklmnopqrstuvwxyz"  # 小写字母
+_letter_cases = "abcdefghijklmnopqrstuvwxyz"  # 小写字母，去除可能干扰的i，l，o，z
 _upper_cases = _letter_cases.upper()  # 大写字母
-_numbers = ''.join(map(str, range(3, 10)))  # 数字
+_numbers = ''.join(map(str, range(1, 10)))  # 数字
 init_chars = ''.join((_letter_cases, _upper_cases, _numbers))
 
-def create_validate_code(size=(120, 30),
+def create_validate_code(size=(129, 39),
                          chars=init_chars,
                          img_type="GIF",
                          mode="RGB",
-                         bg_color=(255, 255, 255),
-                         fg_color=(0, 0, 255),
-                         font_size=18,
-                         font_type="Monaco.ttf",
+                         bg_color=(245, 245, 245),
+                         # fg_color=(105, 105, 105),
+                         fg_color=(139, 126, 102),
+                         font_size=20,
+                         font_type="arial.ttf",
                          length=4,
-                         draw_lines=True,
+                         draw_lines=False,
                          n_line=(1, 2),
                          draw_points=True,
-                         point_chance = 2):
+                         # draw_pointes=False,
+                         point_chance = 1):
     '''
     @todo: 生成验证码图片
     @param size: 图片的大小，格式（宽，高），默认为(120, 30)
@@ -104,6 +106,3 @@ def create_validate_code(size=(120, 30),
     img = img.filter(ImageFilter.EDGE_ENHANCE_MORE) # 滤镜，边界加强（阈值更大）
 
     return img, strs
-
-if __name__ == '__main__':
-    create_validate_code()

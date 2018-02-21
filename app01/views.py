@@ -3,9 +3,9 @@ from django.views.decorators.csrf import csrf_exempt
 # from django.db.models import Q
 from django.db.models import Count
 from app01 import models
-from app01.infrastructure import messages, commons
+from app01.infrastructure import messages, commons,check_code
 # from app01.forms import RegisterForm
-
+import io
 import json
 import datetime
 
@@ -81,7 +81,8 @@ def login(request):
 
         return render(request, "myHomepage.html", {"ret_str": ret_str})
 
-    return HttpResponse("error page!")
+    else:
+        return render(request,"login.html")
 
 
 @csrf_exempt
@@ -180,6 +181,18 @@ def send_code(request):
         ret_dict['status'] = False
         ret_dict['error'] = "Unknowed Error!"
     return HttpResponse(json.dumps(ret_dict))
+
+
+def check_img_code(request):
+    # if request.method == "POST":
+    mstream = io.BytesIO()
+    img, code = check_code.create_validate_code()
+    img.save(mstream, "GIF")
+
+    # print(mstream.getvalue())
+
+    return HttpResponse(mstream.getvalue())
+        # return render(request,"login.html",mstream.getvalue())
 
 
 def messageShow(request):
