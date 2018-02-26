@@ -1,0 +1,28 @@
+.bottom_info{
+    width: 1366px;
+    height: 273px;
+    background: white;
+    margin-top: 20px;
+}
+.footer_link{
+    width: 920px;
+    height: 181px;
+    margin: 0 auto;
+    /*border: 1px solid red;*/
+    padding: 20px 0 10px 80px;
+}
+.list{
+    /*display: inline-block;*/
+    float: left;
+    margin: 0 50px 0 0;
+    display: inline;
+    height: 131px;
+    /*border: 1px solid red;*/
+}
+.list dd{
+    padding: 4px;
+}
+.other_link{
+    /*border: 1px solid red;*/
+    text-align: center;
+}

@@ -1,0 +1,65 @@
+.profile{
+    width: 920px;
+    height: 355px;
+    /*text-align: center;*/
+    margin: 71px auto 0;
+    /*border: 1px solid red;*/
+}
+.personal_photo{
+    text-align: center;
+}
+
+.sex_show{
+    width: 16px;
+    height: 16px;
+    text-align: center;
+    line-height:16px;
+    border-radius:10px;
+    color: white;
+    background-color: hotpink;
+    font-size:50%;
+}
+#user_photo{
+
+    margin-top: 65px;
+    width: 100px;
+    height: 100px;
+    border-radius:51px;
+    border: 2px solid white;
+}
+.description{
+    text-align: center;
+    color: aliceblue;
+}
+.brief{
+    text-align: center;
+    color: aliceblue;
+}
+.column{
+    height: 40px;
+    background: white;
+    margin-top: 85px;
+}
+.tb_tab{
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+}
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+.table_link{
+    position: relative;
+    display: inline-block;
+    height: 40px;
+    margin: 0 auto;
+    line-height: 38px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+a{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    color: black;
+    text-decoration: none;
+}

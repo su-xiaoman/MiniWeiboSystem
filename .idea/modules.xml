@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SNSWeiboSystem.iml" filepath="$PROJECT_DIR$/.idea/SNSWeiboSystem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/MiniWeiboSystem.iml" filepath="$PROJECT_DIR$/.idea/MiniWeiboSystem.iml" />
     </modules>
   </component>
 </project>

@@ -15,23 +15,27 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app01 import views
+from app01.views import global_page,user
+
 from django.conf.urls import url
 from django.views.generic.base import RedirectView
 
-handler403 = views.permission_denied
-handler404 = views.page_not_found
-handler500 = views.page_error
+handler403 = global_page.permission_denied
+handler404 = global_page.page_not_found
+handler500 = global_page.page_error
 
 
 urlpatterns = [
-    url(r'^$',views.homepage),
+    url(r'^$',global_page.index),
     url(r'^favicon.ico$',RedirectView.as_view(url='/static/img/about_UI/favicon.ico')),
     path('admin/', admin.site.urls),
-    path('index/',views.index),
-    path('login/',views.login),
-    path('register/',views.register),
-    path('send_code/',views.send_code),
-    path('check_img_code/',views.check_img_code),
-    path('messageShow/',views.messageShow),
+    path('index/',global_page.index),
+
+    path('login/',user.login),
+    path('register/',user.register),
+    path('send_code/',user.send_code),
+    path('check_img_code/',user.check_img_code),
+    # path('messageShow/',user.messageShow),
+    path('signup/',user.signup),
+    path('user_profile/',user.user_profile),
 ]
