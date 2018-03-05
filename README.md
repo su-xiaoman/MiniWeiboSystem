@@ -1,7 +1,7 @@
 # SNSWeiboSystem #
 	A project that shows how to build a WeiboSystem with Django
 ## 基本说明 ##
-* 这个项目用来展示怎样用**Django**建立一个基本的微博系统，因此我称它MiniWeiboSystem
+* 这个项目用来展示怎样用**Django**建立一个基本的微博系统，因此我称它**MiniWeiboSystem**
 * 整体采用更大型的三层架构， 分离接口和实现
 * 使用的平台和工具包括： **Linux+Django+uwsgi+Nginx+Redis+RabbitMQ+Mysql** 
 * 插件包括：**JQuery+Bootstrap+Font-Awesome。**
@@ -18,6 +18,18 @@
 	+ manage.py        Django启动文件
 	+ miniweibo.sql    Mysql生成的数据库结构
 	+ db.sqlite3       Django自带数据库的文件(可不使用)
+###app01目录说明 
+	+ forms            关于表单验证的相关功能实现
+	+ infrastructure   一些在views中被使用的基础设施
+	+ migrations       Django自动生成的相关数据库迁移表
+	+ repository       模仿Java风格对领域模型models中定义接口的实现
+	+ test             自动生成的test文件，移动到此目录
+	+ views            Django中MTV三大部分之views(V)
+	+ admin.py         自带的admin管理views
+	+ apps.py          自动的apps配置注册views
+	+ Config.py        全局的相关辅助设置，辅助settings.py配置
+	+ Mapper.py        依赖注入的方式等相关基础定义
+	+ models.py        Django的ORM，实现了模型定义和相关伪接口定义
 
 ## 实现功能 
 1. 用户功能： 
@@ -36,6 +48,13 @@
 
 ####关于app01->infrastructure下提供的几个小功能说明
 ``` 
-<p><a href="/home" title="说明">check_code <-->生成包含数字和验证码，位数可以调整 </p>
+<pre><code>
+<span>check_code.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码，位数可以调整</span>
+<span>commons.py</span><span>&nbsp;&nbsp;&nbsp;生成随机数和md5值</span>
+<span>decrator.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码</span>
+<span>messages.py</span><span>&nbsp;&nbsp;&nbsp;关于邮件发送的python实现</span>
+<span>time_for_json.py</span><span>&nbsp;&nbsp;&nbsp;解决HttpResponse和前台Ajax交互序列化相关的问题</span>
+</code></pre>
+
 ```
 	
