@@ -1,0 +1,8 @@
+
+{% for item in comment_tree %}
+    <img src="/{{item.user__head_img}}" alt="">
+    <span>{{item.user__username}}</span>
+    <span>@{{item.p_comment__user_id}}:{{item.comment}}</span>
+    <span>{{item.date}}</span>
+{% endfor %}
+

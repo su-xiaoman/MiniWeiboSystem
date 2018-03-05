@@ -1,7 +1,7 @@
 # -*- coding=utf-8 -*-
 
 from django.db import models
-import datetime
+# import datetime
 
 # Create your models here.
 
@@ -29,17 +29,78 @@ class IUserProfileRepository:
         """
         raise Exception('此接口必须被实现')
 
+    def get_userBasicInfo_by_username(self,username):
+        """
+        通过用户名去获取用户基本信息
+        :param username:
+        :return:
+        """
+
+    def get_myFocusNum_by_username(self,username):
+        """
+
+        :param username:
+        :return:
+        """
+
+    def get_myFansNum_by_username(self, username):
+        """
+
+        :param username:
+        :return:
+        """
+
+    def register_newUser_with_related_info(self,username,email,password,registration_date,user_type):
+        """
+
+        :return:
+        """
+
 class IEmailCodeRepository:
     """
     定义用户注册时的邮箱与验证码接口
     """
-    def fetch_code_by_email(self,email):
+    def get_code_validity_by_email(self,email):
         """
 
         :param email:
         :return:
         """
-        raise Exception("此接口必须被实现!")
+
+    def find_theRegisteredEmail_by_email(self,email):
+        """
+
+        :param email:
+        :return:
+        """
+
+    def find_theRegisteringEmail_by_email(self,email):
+        """
+
+        :param email:
+        :return:
+        """
+
+    def update_VerifyCode_Validity_by_email(self,email,code,stime):
+        """
+
+        :param email:
+        :return:
+        """
+
+    def update_my_register_status_by_email(self, email):
+        """
+
+        :param email:
+        :return:
+        """
+
+    def generate_temporaryEmail_by_VerifyCode_Validity(self,email,code,stime):
+        """
+
+        :param email:
+        :return:
+        """
 
 class ITopicRepository:
     """
@@ -50,7 +111,6 @@ class ITopicRepository:
 
         :return:
         """
-        raise Exception("此接口必须被实现!")
 
 class IWeiboRepository:
     """
@@ -62,9 +122,25 @@ class IWeiboRepository:
         :param username:
         :return:
         """
+    def get_releted_info_by_wbType_Public(self):
+        """
+
+        :return:
+        """
 
 class ICommentRepository:
-    pass
+    def get_all_comments_by_weiboId(self,id):
+        """
+
+        :return:
+        """
+    def set_one_comment_with_info(self,*args,**kwargs):
+        # date id comment_type comment p_comment_id to_weibo_id user_id
+        """
+
+        :param id:
+        :return:
+        """
 
 class ITagsRepository:
     pass
@@ -89,7 +165,6 @@ class EmailCode(models.Model):
     class Meta:
         db_table = "EmailCode"
         verbose_name_plural = "临时邮箱验证码"
-
 
 class Weibo(models.Model):
     '''所有微博'''
@@ -122,7 +197,6 @@ class Weibo(models.Model):
     def __str__(self):
         return self.text
 
-
 class Topic(models.Model):
     '''话题'''
     name = models.CharField(verbose_name="话题名称", max_length=140)
@@ -136,7 +210,6 @@ class Topic(models.Model):
     def __str__(self):
         return self.name
 
-
 class Category(models.Model):
     '''微博分类'''
     name = models.CharField(max_length=32)
@@ -148,25 +221,22 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Comment(models.Model):
     '''评论'''
     to_weibo = models.ForeignKey(Weibo, verbose_name="评论的微博", on_delete=models.CASCADE)
-    # 由于django自带反向查找，因此当自己与自己关联的时候必须加上related_name，从而实现这种查找
-    p_comment = models.ForeignKey('self', verbose_name="父级评论", related_name="child_comments", on_delete=models.CASCADE)
+    p_comment = models.ForeignKey('self', null=True,blank=True,verbose_name="父级评论", related_name="child_comments", on_delete=models.CASCADE)
     user = models.ForeignKey('UserProfile', verbose_name="评论的人", on_delete=models.CASCADE)
-    comment_type_choices = ((0, 'comment'), (1, 'thumb_up'))  # 将评论点赞 整合在同样一张表里
+    comment_type_choices = ((0, '评论'), (1, '点赞'))  # 将评论点赞 整合在同样一张表里
     comment_type = models.IntegerField(choices=comment_type_choices, default=0)
-    comment = models.CharField(verbose_name="评论字数", max_length=140, blank=True, null=True)
-    date = models.DateTimeField(auto_created=True)
+    comment = models.CharField(verbose_name="评论内容", max_length=140, blank=True, null=True)
+    date = models.DateTimeField(verbose_name="评论日期",auto_created=True)
 
     class Meta:
         db_table = "Comment"
-        verbose_name_plural = "评论"
+        verbose_name_plural = "评论表"
 
     def __str__(self):
         return self.comment
-
 
 class Tags(models.Model):
     '''标签'''
@@ -178,7 +248,6 @@ class Tags(models.Model):
 
     def __str__(self):
         return self.name
-
 
 class UserProfile(models.Model):
     '''用户信息'''
@@ -227,7 +296,4 @@ class UserService:
         else:
             user_model = self.userRepository.fetch_one_by_email_pwd(email, password)
 
-        if user_model:
-            current_date = datetime.datetime.now()
-            self.userRepository.update_last_login_by_nid(user_model.nid, current_date)
         return user_model

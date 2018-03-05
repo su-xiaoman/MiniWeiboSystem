@@ -28,6 +28,7 @@ handler500 = global_page.page_error
 urlpatterns = [
     url(r'^$',global_page.index),
     url(r'^favicon.ico$',RedirectView.as_view(url='/static/img/about_UI/favicon.ico')),
+
     path('admin/', admin.site.urls),
     path('index/',global_page.index),
 
@@ -35,7 +36,7 @@ urlpatterns = [
     path('register/',user.register),
     path('send_code/',user.send_code),
     path('check_img_code/',user.check_img_code),
-    # path('messageShow/',user.messageShow),
+    path('comment/',user.comment),
     path('signup/',user.signup),
     path('user_profile/',user.user_profile),
 ]

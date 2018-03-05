@@ -128,7 +128,10 @@
     height: inherit;
     padding: 20px 5px;
     margin-left: 50px;
-    background-color: rgb(247,247,247);
+    /*border: 1px solid #ddd;*/
+    border-radius: 0.4em;
+    color: #555555;
+    /*background-color: rgb(247,247,247);*/
     /*border-bottom-left-radius:9px;*/
     /*border-bottom-right-radius:9px;*/
     /*opacity: 0.8;*/
@@ -145,13 +148,13 @@
 
 }
 
-.commentCol{
+.weibo_menu{
     height:40px;
     width:600px;
     border-top: 1px solid rgba(190,190,190,0.5);
 }
 
-.commentCol dd{
+.weibo_menu dd{
         float:left;
 		list-style:none;
 		padding:0 5px;
@@ -159,6 +162,32 @@
 		line-height:40px;
 		width:25%;
 		text-align:center;
+}
+.commentPlace{
+        height: 700px;
+        width: 600px;
+        border: 1px solid black;
+        margin-top: 15px;
+        overflow: hidden;
+}
+.set_myComment{
+        width: 600px;
+        height: 100px;
+        padding: 10px 5px 0 0;
+        border: 1px solid red;
+
+}
+#commentContent{
+    width: 600px;
+    height: 440px;
+    background: rgb(242,242,245);
+}
+
+.get_allComment{
+    width: 600px;
+    height: auto;
+    border: 1px solid grey;
+    overflow: auto;"
 }
 
 .more{

@@ -1,10 +1,12 @@
 from django.shortcuts import render, HttpResponse
 from app01 import models
 
+
 # from app01.forms import RegisterForm
 
 
 # Create your views here.
+
 
 
 

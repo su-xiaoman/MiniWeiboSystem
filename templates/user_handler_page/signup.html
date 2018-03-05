@@ -190,12 +190,13 @@
                 url:"/send_code/", //发送到的地方
                 type:"POST",
                 data:{"email": email},//默认值为字符串,如果是其它格式需要转换
+                dataType:"jspn",
                 success:function (arg) {
                     //判断后端返回的数据中status是否有问题,如果有问题,则进入xx操作,否则如下操作
                     //发送数据成功之后去做两件事情
                     //第一 设计计时器的状态(当没有出现因为邮箱重复而引发的一系列的问题时)
                     //第二 设置并提示给用户错误的信息是什么(当status为错误时)
-                    var obj = JSON.parse(arg);
+                    // var obj = JSON.parse(arg);
                     console.log(obj);
 
                     if(obj.status){

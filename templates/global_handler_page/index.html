@@ -51,11 +51,12 @@
             margin-left: 12px;
             color: cornflowerblue;
         }
+        .hide{
+            display: none;
+        }
     </style>
 </head>
 <body>
-
-
 
     <!-- 头部仿汽车之家的顶部信息栏 -->
     <div class="top_info clearfix">
@@ -118,6 +119,8 @@
 
 </div>
 
+
+
     <div class="threePart clearfix">
         <div class="bigMenu clearfix" >
             <div class="list-group">
@@ -177,25 +180,44 @@
 
             <div class="messageShow  clearfix">
                 <!--从数据库中拿到数据,按照某种规则拜访,加上相关样式-->
-                {% for item in detail_list %}
+                {% for weibo_item in detail_list %}
                     <div class="show1">
                         <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
                         <div class="briefShow">
-                            <img src="/{{item.user__head_img}}"
+                            <img src="/{{weibo_item.user__head_img}}"
                                     alt="..."
                                         style="float: left;width: 50px;height: 50px;border-radius:26px;border: 1px solid grey;"
                                             class="img-rounded">
-                            <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ item.user__username}}</p>
-                            <p style="margin-left: 60px;">{{ item.date }}</p>
+                            <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ weibo_item.user__username}}</p>
+                            <p style="margin-left: 60px;">{{ weibo_item.date }}</p>
                         </div>
+
                         <div class="textShow">
-                             <p style="margin-left: 21px;">{{ item.text }}</p>
+                             <p style="margin-left: 21px;">{{ weibo_item.text }}</p>
                         </div>
-                        <div class="commentCol">
-                            <dd><i class="fa fa-star-o"></i>收藏</dd>
-                            <dd><i class="fa fa-comment-o"></i></dd>
-                            <dd><i class="fa fa-share-alt"></i></dd>
-                            <dd><i class="fa fa-thumbs-o-up"></i></dd>
+
+                        <div class="weibo_menu">
+                            <dd id="icollect"><i class="fa fa-star-o"  style="cursor: pointer;">收藏</i></dd>
+                            <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)"><i class="fa fa-comment-o" style="cursor: pointer;">评论</i></dd>
+                            <dd id="ishare"><i class="fa fa-share-alt" style="cursor: pointer;">分享</i></dd>
+                            <dd id="ilike"><i class="fa fa-thumbs-o-up" style="cursor: pointer;">点赞</i></dd>
+                        </div>
+
+                        <div class="commentInfo hide">
+
+                            <div class="commentPlace">
+                                {% for user_item in user_list%}
+                                <div class="set_myComment">
+                                    <img src="/{{user_item.head_img}}" style="width: 30px;height: 30px;border: 1px solid grey;">
+                                    <input type="text" style="width: 518px;height: 30px;"/>
+                                    <button weibo_id="{{weibo_item.id}}" target="{{user_item.id}}" onclick="setComment(this);" class="btn btn-default" style="margin: 15px;float: right;">评论</button>
+                                </div>
+                                {% endfor %}
+
+                                <div class="get_allComment" id="commentZone"> </div>
+
+                            </div>
+
                         </div>
 
                     </div>
@@ -281,6 +303,127 @@
 		function PostMessage(ths) {
 		  
 		}
+
+        function ToggleCommentArea(ths) {
+
+          nid = $(ths).attr("target");
+          console.log(nid);
+
+		  $.ajax({
+		    // async :false,
+		    url: "/comment/",
+		    type: "GET",
+		    data:{"nid":nid},
+		    // dataType:"json",
+		    success:function(arg) {
+		        $(ths).parent().next().toggleClass("hide");
+                console.log("success");
+                var data_json = JSON.parse(arg);
+
+                $.each(data_json,function(k,v) {
+                    console.log(k,v);
+                    var user__head_img = v['user__head_img'];
+                    var id = v['id'];
+                    var comment = v['comment'];
+                    var p_comment__user_id = v['p_comment__user_id'];
+                    var date = v['date'];
+                    var p_comment__user__username = v['p_comment__user__username'];
+                    var user__username = v['user__username'];
+
+
+                    obj = $(ths).parent().next().find("#commentZone");
+
+                    obj.append("<div style='height: 2px;width: 600px;border: 1px solid grey;'>");
+
+                    obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
+                    obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
+                    obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
+                    obj.append("<p>"+date+"</p>");
+                    obj.append("</div>")
+
+                })
+
+
+                // console.log(obj.prop("class"));
+
+		    },
+		    error:function(arg) {
+		      console.log("error");
+		      console.log(arg);
+		    }
+
+          })
+        }
+        
+        function setComment(ths) {
+            var comment_data = {};
+            //制造一个字典 里面有to_weibo,p_comment,user,comment_type,comment,data等相关信息
+
+            var comment = $(ths).prev().val();
+            var user_id = $(ths).attr("target");
+            var to_weibo_id = $(ths).attr("weibo_id");
+
+            //理论上这个值是@后面的对象 但是目前为了简单 所以采用空值代表评论根对象
+            var p_comment_id = "";
+
+            comment_data["comment"] = comment;
+            comment_data["user_id"] = user_id;
+            comment_data["to_weibo_id"] = to_weibo_id;
+            comment_data["p_comment_id"] = p_comment_id;
+
+            comment_data = JSON.stringify(comment_data);
+
+            $.ajax({
+                url: "/comment/",
+                type: "POST",
+                data: {"comment_related_data":comment_data},
+                success:function(arg) {
+
+                    console.log("success");
+
+                    var data_json = JSON.parse(arg);
+
+                    obj = $('#commentZone');
+                    obj.empty();//先删除所有评论里面的内容
+
+                    console.log("obj:"+obj);
+
+                    $.each(data_json,function(k,v) {
+                        console.log(k,v);
+                        var user__head_img = v['user__head_img'];
+                        var id = v['id'];
+                        var comment = v['comment'];
+                        var p_comment__user_id = v['p_comment__user_id'];
+                        var date = v['date'];
+                        var p_comment__user__username = v['p_comment__user__username'];
+                        var user__username = v['user__username'];
+
+
+                        obj.append("<div style='height: 2px;width: 600px;border: 1px solid grey;'>");
+
+                        obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
+                        obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
+                        obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
+                        obj.append("<p>"+date+"</p>");
+                        obj.append("</div>")
+
+                    });
+
+                    $(ths).prev().val("");
+
+
+
+
+                },
+                error:function(arg) {
+                  console.log("error");
+                }
+            })
+        }
+
+
+
+
 
     </script>
 
