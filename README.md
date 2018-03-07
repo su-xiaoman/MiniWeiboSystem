@@ -48,13 +48,30 @@
 	> 注册人员管理
 
 #### 关于app01->infrastructure下提供的几个小功能说明
-``` html
-<pre><code>
-<span>check_code.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码，位数可以调整</span>
-<span>commons.py</span><span>&nbsp;&nbsp;&nbsp;生成随机数和md5值</span>
-<span>decrator.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码</span>
-<span>messages.py</span><span>&nbsp;&nbsp;&nbsp;关于邮件发送的python实现</span>
-<span>time_for_json.py</span><span>&nbsp;&nbsp;&nbsp;解决HttpResponse和前台Ajax交互序列化相关的问题</span>
-</code></pre>
+```python
+#此为邮件发送代码功能
+from email.mime.text import MIMEText
+from email.utils import formataddr
+import smtplib
+
+def email(email_list,content,subject="新浪微博用户注册"):
+    # 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码
+    msg = MIMEText(content, 'plain', 'utf-8')
+
+    msg['From'] = formataddr(["新浪科技","你的用户邮箱填写在这里"])
+    msg['to'] = formataddr(["You",email_list])
+    msg['Subject'] = subject
+
+    try:
+        print("正在尝试发送邮件")
+        server = smtplib.SMTP()
+        server.connect("smtp.163.com", 25)
+
+        server.login("你的用户邮箱填写在这里","你的用户密码填写在这里") #两个参数，账号和密码
+        server.sendmail('你的用户邮箱填写在这里',email_list,msg.as_string())
+        print("邮件发送成功")
+    except smtplib.SMTPException:
+        print("Error：无法发送邮件")
 ```
+
 	
