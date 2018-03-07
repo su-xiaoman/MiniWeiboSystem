@@ -51,12 +51,9 @@
 	> 违规贴删除 &nbsp;
 	> 注册人员管理
 
-#### 关于app01->infrastructure下提供的几个小功能说明
+#### 关于utilities包提供的三个实用小功能展示说明，具体代码参见源码部分
 ```python
 #此为邮件发送代码功能
-from email.mime.text import MIMEText
-from email.utils import formataddr
-import smtplib
 
 def email(email_list,content,subject="新浪微博用户注册"):
     # 三个参数：第一个为文本内容，第二个 plain 设置文本格式，第三个 utf-8 设置编码
@@ -79,9 +76,6 @@ def email(email_list,content,subject="新浪微博用户注册"):
 ```
 ```python
 #此为密码加密等所用功能
-import hashlib
-import time
-import random
 
 def random_code():
 	"""
@@ -108,10 +102,8 @@ def generate_md5(value):
 ```
 ```python
 #此为验证码的Python实现过程
-import random
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
-_letter_cases = "abcdefghijklmnopqrstuvwxyz"  # 小写字母，去除可能干扰的i，l，o，z
+_letter_cases = "abcdefghijklmnopqrstuvwxyz"  # 小写字母
 _upper_cases = _letter_cases.upper()  # 大写字母
 _numbers = ''.join(map(str, range(1, 10)))  # 数字
 init_chars = ''.join((_letter_cases, _upper_cases, _numbers))
@@ -131,24 +123,6 @@ def create_validate_code(size=(129, 39),
                          draw_points=True,
                          draw_pointes=False,
                          point_chance = 1):
-    '''
-    @todo: 生成验证码图片
-    @param size: 图片的大小，格式（宽，高），默认为(120, 30)
-    @param chars: 允许的字符集合，格式字符串
-    @param img_type: 图片保存的格式，默认为GIF，可选的为GIF，JPEG，TIFF，PNG
-    @param mode: 图片模式，默认为RGB
-    @param bg_color: 背景颜色，默认为白色
-    @param fg_color: 前景色，验证码字符颜色，默认为蓝色#0000FF
-    @param font_size: 验证码字体大小
-    @param font_type: 验证码字体，默认为 ae_AlArabiya.ttf
-    @param length: 验证码字符个数
-    @param draw_lines: 是否划干扰线
-    @param n_lines: 干扰线的条数范围，格式元组，默认为(1, 2)，只有draw_lines为True时有效
-    @param draw_points: 是否画干扰点
-    @param point_chance: 干扰点出现的概率，大小范围[0, 100]
-    @return: [0]: PIL Image实例
-    @return: [1]: 验证码图片中的字符串
-    '''
 
     width, height = size # 宽， 高
     img = Image.new(mode, size, bg_color) # 创建图形
@@ -209,11 +183,9 @@ def create_validate_code(size=(129, 39),
               float(random.randint(1, 2)) / 500
               ]
     img = img.transform(size, Image.PERSPECTIVE, params) # 创建扭曲
-
     img = img.filter(ImageFilter.EDGE_ENHANCE_MORE) # 滤镜，边界加强（阈值更大）
 
     return img, strs
-
 ```
 
 	
