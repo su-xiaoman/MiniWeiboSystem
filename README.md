@@ -48,7 +48,7 @@
 	> 注册人员管理
 
 #### 关于app01->infrastructure下提供的几个小功能说明
-``` 
+``` html
 <pre><code>
 <span>check_code.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码，位数可以调整</span>
 <span>commons.py</span><span>&nbsp;&nbsp;&nbsp;生成随机数和md5值</span>
@@ -56,6 +56,5 @@
 <span>messages.py</span><span>&nbsp;&nbsp;&nbsp;关于邮件发送的python实现</span>
 <span>time_for_json.py</span><span>&nbsp;&nbsp;&nbsp;解决HttpResponse和前台Ajax交互序列化相关的问题</span>
 </code></pre>
-
 ```
 	
