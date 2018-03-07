@@ -1,4 +1,4 @@
-# SNSWeiboSystem(社交微博系统)#
+# SNSWeiboSystem(社交微博系统) #
 	A project that shows how to build a WeiboSystem with Django
 	一个展示怎样用Django建立微博系统的工程
 ## 基本说明 ##
