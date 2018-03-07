@@ -19,7 +19,7 @@
 	+ manage.py        Django启动文件
 	+ miniweibo.sql    Mysql生成的数据库结构
 	+ db.sqlite3       Django自带数据库的文件(可不使用)
-###app01目录说明 
+### app01目录说明 
 	+ forms            关于表单验证的相关功能实现
 	+ infrastructure   一些在views中被使用的基础设施
 	+ migrations       Django自动生成的相关数据库迁移表
