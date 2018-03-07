@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>我的首页 微博-注册</title>
+
   <link rel="shortcut icon" href="/static/img/about_UI/favicon.ico" />
   <link rel="bookmark" href="/static/img/about_UI/favicon.ico" type="image/x-icon"/>
+
   <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
   <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
   <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
@@ -51,7 +53,7 @@
             width:415px;
             margin-left: 20px;
         }
-        #WB_login{
+        #WB_register{
             display: none;
         }
         .description{
@@ -66,6 +68,10 @@
              text-align:center;
              line-height:40px;
              background-color: rgb(246,246,246);
+        }
+
+        input.invalid::-webkit-input-placeholder {
+            color: rgba(255,0,0,0.6);
         }
 
   </style>
@@ -132,7 +138,7 @@
               <!--此为图片验证码-->
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-check-square fa-fw"></i></span>
-                <input type="text"  id="exampleInputCheckCode" class="form-control" style="width: 240px;margin-right: 4px;" placeholder="VerificationCode" name="email_code">
+                <input type="text"  id="exampleInputimgCode" class="form-control" style="width: 240px;margin-right: 4px;" placeholder="VerificationCode" name="email_code">
 
                 <button style="width: 130px;margin-left: 0;height: 40px;">
                     <img src="/check_img_code/" id='imgCode'>
@@ -143,7 +149,7 @@
                 <button style="width: 130px;margin-left: 288px;height: 40px;" class="btn btn-default">使用邮箱验证码</button>
               </div>
 
-              <button onclick="SubmitLogin(this);" class="btn btn-default" style="margin-bottom: 15px;">登陆</button>
+              <button id="login" class="btn btn-default" style="margin-bottom: 15px;">登陆</button>
 
               <div class="addon">
                 <span style="color: #0f0f0f;">没有账号?</span>
@@ -153,6 +159,7 @@
     </div>
 
     <script type="text/javascript">
+
         function settime(ths,timer){
             //设置逗留时间
             if(timer == 0){
@@ -182,27 +189,28 @@
             var email = $('#exampleInputEmail1').val();
             if(email == ""){
                 alert("您的邮箱为空");
-            }
+            };
 
+            console.log("this1"+this);
             //提示用户邮箱并且发送AJax
             $.ajax({
                 // async: false,
                 url:"/send_code/", //发送到的地方
                 type:"POST",
                 data:{"email": email},//默认值为字符串,如果是其它格式需要转换
-                dataType:"jspn",
+                // dataType:"json",
                 success:function (arg) {
                     //判断后端返回的数据中status是否有问题,如果有问题,则进入xx操作,否则如下操作
                     //发送数据成功之后去做两件事情
                     //第一 设计计时器的状态(当没有出现因为邮箱重复而引发的一系列的问题时)
                     //第二 设置并提示给用户错误的信息是什么(当status为错误时)
-                    // var obj = JSON.parse(arg);
+                    var obj = JSON.parse(arg);
                     console.log(obj);
-
+                    console.log("this2"+this);
                     if(obj.status){
                         //会重新刷新页面,像render一样,感觉还是不错的
                         // location.href = "/register/";
-                        settime(this,30);//为什么出现无法调用的情况
+                        settime($('#send_code'),60);//为什么出现无法调用的情况
                         console.log("success!");
                     }
                     else{
@@ -219,7 +227,8 @@
 
         $("#register").click(function() {
             var post_dict = {};
-            $('.form-control').each(function() {
+
+            $('#WB_register .form-control').each(function() {
               var input_value = $(this).val();
               var name_value = $(this).attr('name');
               post_dict[name_value] = input_value;
@@ -238,22 +247,74 @@
                 success:function (arg) {
                     //当使用json.dumps的时候,返回来的就是json对象,因此下面这句就是有问题的
                     // var obj = JSON.parse(arg);
+                    console.log("-------------------------");
                     console.log(arg,typeof(arg));
+                    console.log("-------------------------");
+
                     if(arg.status){
                        console.log("您已成功注册微博,即将进入个人页面.");
-                       location.href = "/username";
+                       location.href = "/index/";
                        // 状态成功之后链接到某个页面(即登陆界面登陆后进入的界面,否则输出错误信息并放到相应的位置上
                     }else{
                        console.log(arg.error);
                        //$('#send_code').html();
-                        obj2=$('#exampleInputCheckCode');
-                        obj2.val(arg.error);
-                        obj2.css('color','red');
+                       var error_info = arg.error;
+                       if(error_info=="该邮箱已经被注册，请登陆"){
+                            $("#WB_register input[name='email']").val("").addClass("invalid").attr("placeholder",arg.error);
+                       }else{
+                           $('#exampleInputCheckCode').val("").addClass("invalid").attr("placeholder",arg.error);
+                       }
+
                     }
                 }
 
             })
         });
+
+        $("#login").click(function() {
+            var post_dict = {};
+            $('#WB_login .form-control').each(function() {
+              var input_value = $(this).val();
+              var name_value = $(this).attr('name');
+              post_dict[name_value] = input_value;
+            });
+            login_data = JSON.stringify(post_dict);
+            console.log(post_dict);
+            $.ajax({
+                url: "/login/",
+                type: "POST",
+                data: {"login_data":login_data},
+                dataType:"json",
+                success:function(arg) {
+                    if(arg.status){
+                        console.log(arg.status);
+                        location.href = "/index/";
+                    }
+                    else{
+                        var error_info = arg.message;
+                        //错误的信息有几种
+                        //1.ret['message'] = "验证码错误，请重新输入！"
+                        //2.ret['message'] = "用户名不存在或密码错误"
+                        //3.ret['message'] = str(e)
+                        console.log(error_info)
+
+                        if(error_info == "验证码错误，请重新输入"){
+                            $("#WB_login #exampleInputimgCode").val("").addClass("invalid").attr("placeholder",error_info);
+                        }else{
+                            $("#WB_login input[name='username']").val("").addClass("invalid").attr("placeholder",error_info);
+                        }
+
+                    }
+
+                },
+                error:function(arg) {
+                    console.log(arg);
+                }
+            })
+
+        })
+
+
 
     </script>
 

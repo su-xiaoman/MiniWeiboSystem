@@ -10,7 +10,11 @@ class IUserProfileRepository:
     """
     定义用户的仓库接口,用来获取与用户相关的信息
     """
+    def set_login_imgcode_by_username(self, username,code):
+        """
 
+        :return:
+        """
     def fetch_one_by_user_pwd(self, username, password):
         """
 
@@ -127,6 +131,13 @@ class IWeiboRepository:
 
         :return:
         """
+    def set_one_weibo_with_info(self,*args,**kwargs):
+        """
+
+        :param args:
+        :param kwargs:
+        :return:
+        """
 
 class ICommentRepository:
     def get_all_comments_by_weiboId(self,id):
@@ -183,10 +194,11 @@ class Weibo(models.Model):
     text = models.CharField("微博内容", max_length=140)
     pictures_link_id = models.CharField(verbose_name="图片连接id", max_length=128, blank=True, null=True)
     video_link_id = models.CharField(verbose_name="视频链接id", max_length=128, blank=True, null=True)
-    perm_choice = ((0, '公开'),
-                   (1, '仅自己可见'),
-                   (2, '好友圈'),
-                   )
+    perm_choice = (
+        (0, '公开'),
+        (1, '仅自己可见'),
+        (2, '好友圈'),
+    )
     perm = models.IntegerField(verbose_name="微博权限", choices=perm_choice, default=0)
     date = models.DateTimeField(verbose_name="发布日期", auto_now_add=True)
 
@@ -274,7 +286,7 @@ class UserProfile(models.Model):
 
     followed_list = models.ManyToManyField('self', verbose_name="我的关注", blank=True, related_name="my_fans",
                                            symmetrical=False)
-
+    # login_img_code = models.CharField(verbose_name="登陆验证码",max_length=4,null=True)
     # followers = models.ManyToManyField('self',verbose_name="我的关注",blank=True,null=True,related_name="my_watch",symmetrical=False
 
     class Meta:

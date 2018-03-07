@@ -10,7 +10,7 @@ class EmailCodeRepository(IEmailCodeRepository):
         pass
 
     def get_code_validity_by_email(self,email):
-        obj = models.EmailCode.objects.filter(email=email).values('code', 'stime')
+        obj = models.EmailCode.objects.filter(email=email).values('code', 'stime','status')
         return obj
 
     def find_theRegisteredEmail_by_email(self,email):

@@ -54,6 +54,10 @@
         .hide{
             display: none;
         }
+        hr{
+            color: red;
+
+        }
     </style>
 </head>
 <body>
@@ -81,7 +85,7 @@
         <!--此处就有form表单或者ajax-->
         <div class="search">
 
-            <input type="text" placeholder="大家正在搜:为什么毕业答辩要等到六月份" name="condition"/>
+            <input type="text" placeholder="大家正在搜:Taylor Swift会有多少个男朋友?" name="condition"/>
             <button type="submit" class="fa fa-search fa-2x"></button>
 
         </div>
@@ -118,9 +122,7 @@
         </div>
 
 </div>
-
-
-
+    <!--此为主页面的样式显示-->
     <div class="threePart clearfix">
         <div class="bigMenu clearfix" >
             <div class="list-group">
@@ -146,35 +148,40 @@
         <div class="second clearfix">
             <div class="post clearfix">
                 <p id="p1">有什么新鲜事想告诉大家?</p>
-                <input type="text"
-                        style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;"
-                        name="" placeholder="Want to say something??"/>
+                <textarea type="text"
+                         style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;resize: none;"
+                           placeholder="Want to say something??">
+                </textarea>
                 <div class="c1">
-                    <i class="fa fa-plus-square fa-2x"></i>表情
+                    <i class="fa fa-plus-square">表情</i>
                 </div>
                 <div class="c2">
-                    <i class="fa fa-photo fa-2x"></i>图片
+                    <i class="fa fa-photo">图片</i>
                 </div>
                 <div class="c3">
-                    <i class="fa fa-film fa-2x"></i>视频
+                    <i class="fa fa-film">视频</i>
                 </div>
                 <div class="c4">
-                    <i class="fa fa-hashtag fa-2x"></i>话题
+                    <i class="fa fa-hashtag">话题</i>
                 </div>
                 <div class="c5">
-                    <i class="fa fa-star fa-2x"></i>头条文章
+                    <i class="fa fa-star">头条文章</i>
+                </div>
+                <div class="cMore">
+                    <i class="fa fa-bars">更多</i>
                 </div>
                 <div class="c6">
                     <div class="dropdown">
-                      <i class="fa fa-bars fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                      <i class="fa fa-angle-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">公开</i>
                       <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        <li>点评</li>
-                        <li>直播</li>
+                        <li onclick="TogglePostStatus(this);">公开</li>
+                        <li onclick="TogglePostStatus(this);">仅自己可见</li>
+                        <li onclick="TogglePostStatus(this);">好友圈可见</li>
                       </ul>
                     </div>
                 </div>
                 <div class="c7">
-                    <button onclick="PostMessage();">发布</button>
+                    <button onclick="PostMessage(this);">发布</button>
                 </div>
             </div>
 
@@ -184,16 +191,13 @@
                     <div class="show1">
                         <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
                         <div class="briefShow">
-                            <img src="/{{weibo_item.user__head_img}}"
-                                    alt="..."
-                                        style="float: left;width: 50px;height: 50px;border-radius:26px;border: 1px solid grey;"
-                                            class="img-rounded">
+                            <img src="/{{weibo_item.user__head_img}}" id="photo_identity" class="img-rounded">
                             <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ weibo_item.user__username}}</p>
                             <p style="margin-left: 60px;">{{ weibo_item.date }}</p>
                         </div>
 
                         <div class="textShow">
-                             <p style="margin-left: 21px;">{{ weibo_item.text }}</p>
+                            <p style="margin-left: 21px;">{{ weibo_item.text }}</p>
                         </div>
 
                         <div class="weibo_menu">
@@ -201,6 +205,7 @@
                             <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)"><i class="fa fa-comment-o" style="cursor: pointer;">评论</i></dd>
                             <dd id="ishare"><i class="fa fa-share-alt" style="cursor: pointer;">分享</i></dd>
                             <dd id="ilike"><i class="fa fa-thumbs-o-up" style="cursor: pointer;">点赞</i></dd>
+
                         </div>
 
                         <div class="commentInfo hide">
@@ -225,10 +230,7 @@
 
             </div>
 
-
-
-
-      </div>
+        </div>
         <div class="more clearfix">
             <div class="personal clearfix">
                 {% for item in user_list %}
@@ -269,7 +271,7 @@
                         {% for item in topic_info %}
                         <li class="clearfix" style="list-style: none;">
                             <span style="padding-left:12px;float: left;padding-bottom: 4px;padding-top: 4px;">{{item.name}}</span>
-                            <span style="float: right">{{item.readers}}</span>
+                            <span style="float: right;margin-right: 3px;">{{item.readers}}</span>
                         </li>
                         {% endfor %}
                     </ul>
@@ -301,7 +303,42 @@
 		}
 
 		function PostMessage(ths) {
-		  
+		    var weibo_info = {}
+
+		    var text = $(".post>textarea").val();
+		    var post_status = $(".c6 i").text();
+		    if(post_status == "公开"){
+		        var the_perm = 0;
+		    }else if(post_status == "仅自己可见"){
+		        var the_perm = 1;
+		    }else{
+		        var the_perm = 2;
+		    }
+            var perm = the_perm;
+		    var wb_type = 0;
+		    var user_id = $(".commentPlace button").attr("target");
+
+		    weibo_info["text"] = text;
+            weibo_info["user_id"] = user_id;
+            weibo_info["wb_type"] = wb_type;
+            weibo_info["perm"] = perm;
+
+            weibo_data = JSON.stringify(weibo_info);
+
+		    $.ajax({
+		        url: "/post_weibo/",
+		        type: "POST",
+		        data: {"weibo_data":weibo_data},
+                success:function(arg) {
+                    if(arg=="right"){
+                        location.href = ("/index/");
+                    }
+                    console.log(arg);
+                },
+                error:function(arg) {
+                  console.log("error");
+                }
+		    })
 		}
 
         function ToggleCommentArea(ths) {
@@ -333,13 +370,11 @@
 
                     obj = $(ths).parent().next().find("#commentZone");
 
-                    obj.append("<div style='height: 2px;width: 600px;border: 1px solid grey;'>");
-
                     obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
                     obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
                     obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
                     obj.append("<p>"+date+"</p>");
-                    obj.append("</div>")
+                    obj.append("<hr style='height: 1px;border: none;background-color: #555555;'/>")
 
                 })
 
@@ -399,20 +434,16 @@
                         var user__username = v['user__username'];
 
 
-                        obj.append("<div style='height: 2px;width: 600px;border: 1px solid grey;'>");
 
                         obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
                         obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
                         obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
                         obj.append("<p>"+date+"</p>");
-                        obj.append("</div>")
+                        obj.append("<hr style='height: 1px;border: none;background-color: #555555;'/>")
 
                     });
 
                     $(ths).prev().val("");
-
-
-
 
                 },
                 error:function(arg) {
@@ -421,9 +452,10 @@
             })
         }
 
-
-
-
+        function TogglePostStatus(ths) {
+            current_status = $(ths).text();
+            $(ths).parent().prev().text(current_status);
+        }
 
     </script>
 

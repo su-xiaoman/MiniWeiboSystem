@@ -11,22 +11,11 @@
     float: left;
     width: 200px;
     height: 500px;
-
     background-color: rgba(70,149,194,0.3);
-    /*margin-left: 145px;*/
-
     position: fixed;
     top: 75px;
     left: 145px;
-    /*left: 0;*/
-    /*border: 1px solid brown;*/
-
-
 }
-/*a .list-group-item{*/
-    /*color: white;*/
-/*}*/
-
 
 .second{
     float: left;
@@ -35,9 +24,7 @@
     margin-left: 353px;
     /*margin-top: 15px;*/
     /*position: relative;*/
-
     /*border: 1px solid red;*/
-
 }
 .post{
     float: left;
@@ -61,43 +48,64 @@
 .post .c2{
     float: left;
     /*border: 1px solid red;*/
-    margin: 10px;
+    margin: 10px 8px 10px 8px;
     color: green;
 }
 
 .post .c3{
     float: left;
     /*border: 1px solid red;*/
-    margin: 10px;
+    margin: 10px 8px 10px 8px;
     color: deepskyblue;
 }
 
 .second .post .c4{
     float: left;
     /*border: 1px solid red;*/
-    margin: 10px;
+    margin: 10px 8px 10px 8px;
     color: rosybrown;
 }
 
 .second .post .c5{
     float: left;
     /*border: 1px solid red;*/
-    margin: 10px;
-    color: darkblue;
+    margin: 10px 8px 10px 8px;
+    color: dodgerblue;
+}
+.second .post .cMore{
+    float: left;
+    margin: 10px 8px 10px 8px;
+    color: #3e8f3e;
 }
 .second .post .c6{
     float: left;
     /*border: 1px solid red;*/
-    margin: 10px;
+    margin: 10px 0 10px 0;
     color: grey;
 }
+.second .post .c6 i{
+    cursor: pointer;
+    font-size: 10px;
+    color: crimson;
+}
+.second .post .c6 li{
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+
+
+}
+.dropdown-menu li:hover{
+    background-color: lightgray;
+}
+
 .second .post .c7 button{
-    float: left;
-    width: 120px;
+    float: right;
+    width: 114px;
     height: 38px;
-    margin-left: 6px;
-    margin-top: 5px;
-    background-color: seagreen;
+    margin-right: 15px;
+    margin-top: 2px;
+    background-color: orangered;
     color: aliceblue;
     font-size: 14px;
 }
@@ -116,12 +124,14 @@
 .briefShow{
     width: 600px;
     height: 60px;
-
-    /*background-color:white;*/
-    /*border: 1px solid red;*/
     padding: 17px;
-
-    /*opacity: 0.8;*/
+}
+#photo_identity{
+    float: left;
+    width: 50px;
+    height: 50px;
+    border-radius:26px;
+    border: 1px solid grey;"
 }
 .textShow{
     width: 550px;
@@ -132,8 +142,6 @@
     border-radius: 0.4em;
     color: #555555;
     /*background-color: rgb(247,247,247);*/
-    /*border-bottom-left-radius:9px;*/
-    /*border-bottom-right-radius:9px;*/
     /*opacity: 0.8;*/
 
 }
@@ -152,6 +160,7 @@
     height:40px;
     width:600px;
     border-top: 1px solid rgba(190,190,190,0.5);
+    border-bottom: 1px solid rgba(190,190,190,0.5);
 }
 
 .weibo_menu dd{
@@ -163,19 +172,22 @@
 		width:25%;
 		text-align:center;
 }
+.commentInfo{
+    margin-top: 2px;
+    /*border: 1px solid black;*/
+}
 .commentPlace{
         height: 700px;
         width: 600px;
-        border: 1px solid black;
+        /*border: 1px solid black;*/
         margin-top: 15px;
         overflow: hidden;
 }
 .set_myComment{
         width: 600px;
         height: 100px;
-        padding: 10px 5px 0 0;
-        border: 1px solid red;
-
+        padding: 10px 5px 0 3px;
+        border-bottom: 1px solid grey;
 }
 #commentContent{
     width: 600px;
@@ -186,7 +198,7 @@
 .get_allComment{
     width: 600px;
     height: auto;
-    border: 1px solid grey;
+    /*border: 1px solid grey;*/
     overflow: auto;"
 }
 
@@ -254,9 +266,7 @@
     /*border: 1px solid red;*/
     border-radius:6px;
     margin-top: 10px;
-        position: fixed;
-    bottom: 40px;
-    left: 967px;
+
 }
 .hotTopic{
     width: 233px;

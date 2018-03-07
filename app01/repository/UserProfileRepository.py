@@ -10,6 +10,9 @@ class UserProfileRepository(IUserProfileRepository):
     def __init__(self):
         pass
 
+    def set_login_imgcode_by_username(self, username,code):
+        models.UserProfile.objects.filter(username=username).update(login_img_code=code)
+
     def fetch_one_by_user_pwd(self,username,password):
         pass
 

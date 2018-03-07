@@ -22,7 +22,7 @@ def create_validate_code(size=(129, 39),
                          draw_lines=False,
                          n_line=(1, 2),
                          draw_points=True,
-                         # draw_pointes=False,
+                         draw_pointes=False,
                          point_chance = 1):
     '''
     @todo: 生成验证码图片

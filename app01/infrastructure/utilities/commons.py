@@ -26,7 +26,7 @@ def generate_md5(value):
 
 if __name__ == '__main__':
     #r = random_code()
-    r = generate_md5("afdsa")
+    r = generate_md5("abc")
     print(r)
 
 

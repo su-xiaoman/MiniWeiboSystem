@@ -25,3 +25,9 @@ class WeiboRepository(IWeiboRepository):
                                                       "date",
                                                       ).order_by("-date")
         return detail_list
+
+    def set_one_weibo_with_info(self,*args,**kwargs):
+        if models.Weibo.objects.create(*args,**kwargs):
+            return True
+        else:
+            return False

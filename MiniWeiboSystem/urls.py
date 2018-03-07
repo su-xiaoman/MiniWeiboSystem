@@ -38,5 +38,6 @@ urlpatterns = [
     path('check_img_code/',user.check_img_code),
     path('comment/',user.comment),
     path('signup/',user.signup),
+    path('post_weibo/',user.post_weibo),
     path('user_profile/',user.user_profile),
 ]
