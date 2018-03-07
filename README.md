@@ -47,7 +47,7 @@
 	> 违规贴删除 &nbsp;
 	> 注册人员管理
 
-####关于app01->infrastructure下提供的几个小功能说明
+#### 关于app01->infrastructure下提供的几个小功能说明
 ``` 
 <pre><code>
 <span>check_code.py</span><span>&nbsp;&nbsp;&nbsp;生成包含数字和验证码，位数可以调整</span>
