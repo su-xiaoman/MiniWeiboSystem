@@ -7,7 +7,11 @@
 * 使用的平台和工具包括： **Linux+Django+uwsgi+Nginx+Redis+RabbitMQ+Mysql** 
 * 插件包括：**JQuery+Bootstrap+Font-Awesome。**
 * 实现过程：基于B/S架构,结合数据库与服务器，交互前端和后端。
-> 关于相关的配置和说明参考,点击：[Django在Linux上的部署的相关说明](https://github.com/lyamango/DeployDjangoOnLinux)
+* 整个项目会是一个很棒的Django练习和设计的平台
+> jQuery &nbsp;[中文使用教程](http://jquery.cuishifeng.cn/) </br>
+> Bootstrap &nbsp;[中文使用教程](https://v3.bootcss.com/) </br>
+> Font-Awesome &nbsp;[中文使用教程](http://fontawesome.dashgame.com/) </br>
+> 关于uwsgi+Nginx+Redis+RabbitMQ+Mysql相关的配置和说明参考,点击：[Django在Linux上的部署的相关说明](https://github.com/lyamango/DeployDjangoOnLinux)
 		
 		
 ## 目录说明
