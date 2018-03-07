@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-02-20 15:41:28
+Date: 2018-03-07 23:17:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -124,7 +124,7 @@ CREATE TABLE `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_type` int(11) NOT NULL,
   `comment` varchar(140) DEFAULT NULL,
-  `p_comment_id` int(11) NOT NULL,
+  `p_comment_id` int(11) DEFAULT NULL,
   `to_weibo_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -134,7 +134,7 @@ CREATE TABLE `comment` (
   CONSTRAINT `Comment_p_comment_id_4dc4bb97_fk_Comment_id` FOREIGN KEY (`p_comment_id`) REFERENCES `comment` (`id`),
   CONSTRAINT `Comment_to_weibo_id_c417420a_fk_Weibo_id` FOREIGN KEY (`to_weibo_id`) REFERENCES `weibo` (`id`),
   CONSTRAINT `Comment_user_id_1cbe86a2_fk_UserProfile_id` FOREIGN KEY (`user_id`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for django_admin_log
@@ -154,7 +154,7 @@ CREATE TABLE `django_admin_log` (
   KEY `django_admin_log_user_id_c564eba6_fk` (`user_id`),
   CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
   CONSTRAINT `django_admin_log_user_id_c564eba6_fk` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for django_content_type
@@ -178,7 +178,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for django_session
@@ -204,7 +204,7 @@ CREATE TABLE `emailcode` (
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `app01_emailcode_email_cc44456e_uniq` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for tags
@@ -247,7 +247,7 @@ CREATE TABLE `userprofile` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `UserProfile_email_a9be228b_uniq` (`email`),
   UNIQUE KEY `UserProfile_username_9ca2e56f_uniq` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for userprofile_followed_list
@@ -283,5 +283,5 @@ CREATE TABLE `weibo` (
   KEY `Weibo_user_id_efbf3ccf_fk_UserProfile_id` (`user_id`),
   CONSTRAINT `Weibo_forward_or_collect_from_id_b28b5a28_fk_Weibo_id` FOREIGN KEY (`forward_or_collect_from_id`) REFERENCES `weibo` (`id`),
   CONSTRAINT `Weibo_user_id_efbf3ccf_fk_UserProfile_id` FOREIGN KEY (`user_id`) REFERENCES `userprofile` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 SET FOREIGN_KEY_CHECKS=1;
