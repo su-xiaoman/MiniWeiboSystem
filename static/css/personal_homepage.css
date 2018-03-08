@@ -1,6 +1,6 @@
 .profile{
     width: 920px;
-    height: 355px;
+    height: 300px;
     /*text-align: center;*/
     margin: 71px auto 0;
     /*border: 1px solid red;*/
@@ -38,7 +38,7 @@
 .column{
     height: 40px;
     background: white;
-    margin-top: 85px;
+    margin-top: 33px;
 }
 .tb_tab{
     width: 100%;

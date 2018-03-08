@@ -8,4 +8,4 @@ SESSION_TYPE = "cache"
 
 SESSION_EXPIRES = 20
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "/signup/"

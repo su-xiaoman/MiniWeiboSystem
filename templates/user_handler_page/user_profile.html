@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>XXX的微博</title>
+  <title>我的微博主页</title>
   <link rel="shortcut icon" href="/static/img/about_UI/favicon.ico" />
   <link rel="bookmark" href="/static/img/about_UI/favicon.ico" type="image/x-icon"/>
   <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
@@ -12,6 +12,7 @@
 
   <link rel="stylesheet" href="/static/css/top_info.css">
   <link rel="stylesheet" href="/static/css/head_band.css">
+  <link rel="stylesheet" href="/static/css/threePart.css">
   <link rel="stylesheet" href="/static/css/personal_homepage.css">
   <link rel="stylesheet" href="/static/css/related_info.css">
   <link rel="stylesheet" href="/static/css/bottom_info.css">
@@ -35,6 +36,9 @@
         display: block;
         visibility: hidden;
         height: 0;
+    }
+    hide{
+        display: none;
     }
   </style>
 </head>
@@ -61,21 +65,18 @@
 
         <!--此处就有form表单或者ajax-->
         <div class="search">
-
             <input type="text" placeholder="大家正在搜:为什么毕业答辩要等到六月份" name="condition"/>
             <button type="submit" class="fa fa-search fa-2x"></button>
-
         </div>
 
         <!--此为几个主要菜单栏-->
         <div class="main_menu">
             <div class="linkPage">
-                <a href="javascript:void(0);"><i class="fa fa-home fa-2x"></i>&nbsp;首页</a>
+                <a href="/index/"><i class="fa fa-home fa-2x"></i>&nbsp;首页</a>
                 <a href="javascript:void(0);"><i class="fa fa-youtube-play fa-2x"></i>&nbsp;视频</a>
                 <a href="javascript:void(0);"><i class="fa fa-compass fa-2x fa-fw"></i>&nbsp;发现</a>
                 <a href="javascript:void(0);"><i class="fa fa-gamepad fa-2x fa-fw"></i>&nbsp;游戏</a>
             </div>
-
             <div class="myfunction">
                 <div class="dropdown">
                   <i class="fa fa-envelope-o fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -95,22 +96,23 @@
                 <div class="fa fa-wrench fa-2x"></div>
 
             </div>
-
         </div>
 
-</div>
+    </div>
 
-    <div class="profile">
-        <div class="personal_photo">
-            <img src="" class="img-rounded" id="user_photo"/>
+    <div class="profile clearfix">
+        {% for user_item in user_info %}
+        <div  style="text-align: center;">
+            <img src="/{{user_item.head_img}}" class="img-rounded" id="user_photo"/>
         </div>
 
         <div class="description">
-            <span style="font-size: 20px;">新流苏没有满<i class="fa fa-venus sex_show"></i></span>
+            <span style="font-size: 20px;">{{user_item.username}}<i class="fa fa-venus sex_show">{{user_item.sex}}</i></span>
         </div>
         <div class="brief">
-             <span>一句话介绍自己</span>
+             <span>{{user_item.brief}}</span>
         </div>
+        {% endfor %}
         <div class="column">
             <table class="tb_tab" cellpadding="0" cellspacing="0">
                 <tbody>
@@ -131,15 +133,15 @@
                     <tbody>
                         <tr>
                             <td>
-                                <strong>30</strong>
+                                <strong>{{follows_num.follows}}</strong>
                                 <div>关注</div>
                             </td>
                             <td>
-                                <strong>48</strong>
+                                <strong>{{fans_num}}</strong>
                                 <div>粉丝</div>
                             </td>
                             <td>
-                                <strong>1</strong>
+                                <strong>{{weibo_num.weibo_num}}</strong>
                                 <div>微博</div>
                             </td>
 
@@ -163,7 +165,7 @@
                     </div>
                 </div>
                 <div class="threepart">
-                    <span>编辑个人资料&nbsp;&nbsp;<i class="fa fa-angle-right"></i></span>
+                    <span>编辑个人资料<i class="fa fa-angle-right"></i></span>
                 </div>
             </div>
             <div class="thumb_up">
@@ -171,9 +173,65 @@
                 <div>查看更多 ></div>
             </div>
         </div>
-        <div class="related_info2"></div>
+        <div class="related_info2" style="overflow: auto;">
+            <div class="messageShow  clearfix" style="margin-top: 0;">
+                <!--从数据库中拿到数据,按照某种规则拜访,加上相关样式-->
+                {% for weibo_item in my_weibo %}
+                    <div class="show1">
+                        <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
+                        <div class="briefShow">
+                            <img src="/{{weibo_item.user__head_img}}" id="photo_identity" class="img-rounded">
+                            <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ weibo_item.user__username}}</p>
+                            <p style="margin-left: 60px;">{{ weibo_item.date }}</p>
+                        </div>
+
+                        <div class="textShow">
+                            <p style="margin-left: 21px;">{{ weibo_item.text }}</p>
+                        </div>
+
+                        <div class="weibo_menu">
+                            <dd id="icollect"><i class="fa fa-star-o"  style="cursor: pointer;">收藏</i></dd>
+                            <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)"><i class="fa fa-comment-o" style="cursor: pointer;">评论</i></dd>
+                            <dd id="ishare"><i class="fa fa-share-alt" style="cursor: pointer;">分享</i></dd>
+                            <dd id="ilike"><i class="fa fa-thumbs-o-up" style="cursor: pointer;">点赞</i></dd>
+
+                        </div>
+
+                        <div class="commentInfo hide">
+                            <div class="commentPlace">
+                                {% for user_item in user_info%}
+                                <div class="set_myComment">
+                                    <img src="/{{user_item.head_img}}" style="width: 30px;height: 30px;border: 1px solid grey;">
+                                    <input type="text" style="width: 518px;height: 30px;"/>
+                                    <button weibo_id="{{weibo_item.id}}" target="{{user_item.id}}" onclick="setComment(this);" class="btn btn-default" style="margin: 15px;float: right;">评论</button>
+                                </div>
+                                {% endfor %}
+
+                                <div class="get_allComment" id="commentZone"> </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                {% endfor%}
+
+            </div>
+            <div class="detail_personal_info clearfix">
+                {% for person_item in personal_info %}
+                <p><span>用户类型:</span>{{person_item.user}}</p>
+                <p><span>用户名:</span>{{person_item.username}}</p>
+                <p><span>个人简介:</span>{{person_item.brief}}</p>
+                <p><span>性别:</span>{{person_item.sex}}</p>
+                <p><span>邮箱:</span>{{person_item.email}}</p>
+                <p><span>密码:</span>{{person_item.password}}</p>
+                <p><span>头像:</span><img src="/{{person_item.head_img}}" alt=""></p>
+                <p><span>注册时间:</span>{{person_item.registration_date}}</p>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-    <div class="bottom_info">
+
+    <div class="bottom_info clearfix">
         <div class="footer_link">
             <dl class="list">
                 <dt>微博精彩</dt>
@@ -228,8 +286,61 @@
             <p>广播电视节目制作经营许可证</p>
         </div>
     </div>
+    <script type="text/javascript">
+        function ToggleCommentArea(ths) {
+
+          nid = $(ths).attr("target");
+          console.log(nid);
+
+		  $.ajax({
+		    // async :false,
+		    url: "/comment/",
+		    type: "GET",
+		    data:{"nid":nid},
+		    // dataType:"json",
+		    success:function(arg) {
+		        $(ths).parent().next().toggleClass("hide");
+                console.log("success");
+                var data_json = JSON.parse(arg);
+
+                $.each(data_json,function(k,v) {
+                    console.log(k,v);
+                    var user__head_img = v['user__head_img'];
+                    var id = v['id'];
+                    var comment = v['comment'];
+                    var p_comment__user_id = v['p_comment__user_id'];
+                    var date = v['date'];
+                    var p_comment__user__username = v['p_comment__user__username'];
+                    var user__username = v['user__username'];
 
 
+                    obj = $(ths).parent().next().find("#commentZone");
+
+                    obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
+                    obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
+                    obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
+                    obj.append("<p>"+date+"</p>");
+                    obj.append("<hr style='height: 1px;border: none;background-color: #555555;'/>")
+
+                })
+
+
+                // console.log(obj.prop("class"));
+
+		    },
+		    error:function(arg) {
+		      console.log("error");
+		      console.log(arg);
+		    }
+
+          })
+        }
+
+        $(".verify .threepart span").click(function() {
+          $(".related_info2 .messageShow").toggle();
+          $(".related_info2 .detail_personal_info").toggle();//.removeClass("hide");
+        })
+    </script>
 
 
 

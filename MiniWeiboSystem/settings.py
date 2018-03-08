@@ -88,7 +88,7 @@ DATABASES = {
         'ENGINE':'django.db.backends.mysql', #这里证明了其实关于引擎部分的修改是非常容易的
         'NAME':'miniweibo', #这里填写相关的数据库名
         'USER':'root',
-        'PASSWORD':'123456',
+        'PASSWORD':'',
     }
 }
 # Session definition here
