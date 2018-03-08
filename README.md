@@ -23,11 +23,14 @@
 	+ manage.py        Django启动文件
 	+ miniweibo.sql    Mysql生成的数据库结构
 	+ db.sqlite3       Django自带数据库的文件(可不使用)
+	+ .gitattributes   解决git系统无法有效识别项目所用工程语言的必要生成
+	+ LICENSE          许可文件，为Mozilla Public License 2.0标准
 ### app01目录说明 
 	+ forms            关于表单验证的相关功能实现
 	+ infrastructure   一些在views中被使用的基础设施
 	+ migrations       Django自动生成的相关数据库迁移表
 	+ repository       模仿Java风格对领域模型models中定义接口的实现
+	+ templatetags     simple_tag功能支持必要的文件目录，如分页等
 	+ test             自动生成的test文件，移动到此目录
 	+ views            Django中MTV三大部分之views(V)
 	+ admin.py         自带的admin管理views
