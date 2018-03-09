@@ -1,0 +1,27 @@
+2018-03-09 15:23:52 PM-root-INFO-user:Using login function!
+2018-03-09 15:24:14 PM-root-INFO-user:Using comment function!
+2018-03-09 21:49:13 PM-root-INFO-user:Using login function!
+2018-03-09 21:49:22 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:49:33 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:49:58 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:50:04 PM-django.request-ERROR-exception:Internal Server Error: /upload_file/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 357, in upload_file
+    filename = os.path.join("static/img/user_pic/", obj.name)
+AttributeError: 'NoneType' object has no attribute 'name'
+2018-03-09 21:50:12 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:50:19 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:50:29 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:55:46 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:55:49 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 21:56:30 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 22:00:58 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 22:02:30 PM-root-INFO-user:Using gethomepage function!

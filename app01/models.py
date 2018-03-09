@@ -15,6 +15,7 @@ class IUserProfileRepository:
 
         :return:
         """
+
     def fetch_one_by_user_pwd(self, username, password):
         """
 
@@ -57,6 +58,27 @@ class IUserProfileRepository:
     def register_newUser_with_related_info(self,username,email,password,registration_date,user_type):
         """
 
+        :return:
+        """
+
+    def get_detail_person_info_by_username(self,username):
+        """
+
+        :param username:
+        :return:
+        """
+
+    def change_person_info_by_username(self,username,brief,sex,password):
+        """
+
+        :param username:
+        :return:
+        """
+
+    def change_person_headImg_by_username(self,username,head_img):
+        """
+
+        :param username:
         :return:
         """
 
@@ -129,6 +151,12 @@ class IWeiboRepository:
     def get_releted_info_by_wbType_Public(self):
         """
 
+        :return:
+        """
+    def get_weibo_info_by_username(self,username):
+        """
+
+        :param username:
         :return:
         """
     def set_one_weibo_with_info(self,*args,**kwargs):
@@ -269,13 +297,15 @@ class UserProfile(models.Model):
         (2, "普通用户"),
         (3, "VIP用户"),
     )
-
+    sex_type = (
+        (0, '女'),
+        (1, '男'),
+    )
     user = models.IntegerField(verbose_name="用户类型", choices=user_type, default=2)
 
     username = models.CharField(verbose_name="用户名", max_length=64, unique=True)
     brief = models.CharField(verbose_name="个人简历", max_length=140, blank=True, null=True)
 
-    sex_type = ((1, '男'), (0, '女'))
     sex = models.IntegerField(verbose_name="性别", choices=sex_type, default=1)
     age = models.PositiveSmallIntegerField(verbose_name="年龄", blank=True, null=True)
     email = models.EmailField(verbose_name="邮箱", unique=True)
@@ -286,7 +316,6 @@ class UserProfile(models.Model):
 
     followed_list = models.ManyToManyField('self', verbose_name="我的关注", blank=True, related_name="my_fans",
                                            symmetrical=False)
-    # login_img_code = models.CharField(verbose_name="登陆验证码",max_length=4,null=True)
     # followers = models.ManyToManyField('self',verbose_name="我的关注",blank=True,null=True,related_name="my_watch",symmetrical=False
 
     class Meta:
@@ -295,7 +324,6 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.username
-
 
 # 协调者
 class UserService:

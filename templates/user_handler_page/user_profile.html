@@ -6,6 +6,7 @@
   <link rel="shortcut icon" href="/static/img/about_UI/favicon.ico" />
   <link rel="bookmark" href="/static/img/about_UI/favicon.ico" type="image/x-icon"/>
   <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
+
   <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
   <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
 
@@ -37,9 +38,18 @@
         visibility: hidden;
         height: 0;
     }
+    #image{
+        width:90px;
+        height:90px;
+        margin-top: 4px;
+        /*border:1px solid red;*/
+        float: left;
+        border-radius: 3px;
+    }
     hide{
         display: none;
     }
+
   </style>
 </head>
 <body>
@@ -103,8 +113,32 @@
     <div class="profile clearfix">
         {% for user_item in user_info %}
         <div  style="text-align: center;">
-            <img src="/{{user_item.head_img}}" class="img-rounded" id="user_photo"/>
+            <img src="/{{user_item.head_img}}" class="img-rounded" id="user_photo" data-toggle="modal" data-target="#myModal"/>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">头像更换</h4>
+                  </div>
+                  <div class="modal-body" style="height: 120px;">
+                        <form id="upload_file" enctype="multipart/form-data">
+                            <span class="btn-default" style="height:20px;position: absolute;left: -10px;top: 3px;border-radius: 2px;">点击文件上传</span>
+                            <input type="file" id="files" name="head_img_change" onchange="PreviewFile(this);"
+                                    multiple style="opacity: 0;margin-top: -15px;"/>
+                            <img id="image" src="/static/img/about_UI/add.png" style="border: 1px solid gainsboro;" draggable="true"/>
+                        </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="submitMyHeadImg(this);">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
+
 
         <div class="description">
             <span style="font-size: 20px;">{{user_item.username}}<i class="fa fa-venus sex_show">{{user_item.sex}}</i></span>
@@ -217,16 +251,43 @@
 
             </div>
             <div class="detail_personal_info clearfix">
-                {% for person_item in personal_info %}
-                <p><span>用户类型:</span>{{person_item.user}}</p>
-                <p><span>用户名:</span>{{person_item.username}}</p>
-                <p><span>个人简介:</span>{{person_item.brief}}</p>
-                <p><span>性别:</span>{{person_item.sex}}</p>
-                <p><span>邮箱:</span>{{person_item.email}}</p>
-                <p><span>密码:</span>{{person_item.password}}</p>
-                <p><span>头像:</span><img src="/{{person_item.head_img}}" alt=""></p>
-                <p><span>注册时间:</span>{{person_item.registration_date}}</p>
-                {% endfor %}
+                <div class="info_group">
+                    <div class="clearfix" style="background-color: white">
+                        <button class="btn btn-default" style="float: left;" onclick="info_change(this);">点击修改</button>
+                        <button class="btn btn-default" style="float: right;" onclick="info_save(this);">点击保存</button>
+                    </div>
+                    {% for person_item in personal_info %}
+                    <div class="input-group">
+                        <span class="input-group-addon">用户类型:</span>
+                        <input type="text" class="form-control" value="{{person_item.user}}" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">用户名:</span>
+                        <input type="text" class="form-control" value="{{person_item.username}}" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">个人简介:</span>
+                        <input type="text" class="form-control" value="{{person_item.brief}}" name="brief" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">性别:</span>
+                        <input type="text" class="form-control" value="{{person_item.sex}}" name="sex" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">邮箱:</span>
+                        <input type="text" class="form-control" value="{{person_item.email}}" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">密码:</span>
+                        <input type="text" class="form-control" value="{{person_item.password}}" name="password" disabled="disabled">
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-addon">注册时间:</span>
+                        <input type="text" class="form-control" value="{{person_item.registration_date}}" disabled="disabled">
+                    </div>
+                    {% endfor %}
+                </div>
+
             </div>
         </div>
     </div>
@@ -336,10 +397,102 @@
           })
         }
 
+        function PreviewFile(ths){
+			 var reader = new FileReader();
+
+             reader.onload = function (e) {
+                // get loaded data and render thumbnail.
+                $("#image").attr('src',e.target.result);
+             };
+
+            // read the image file as a data URL.
+            reader.readAsDataURL(ths.files[0]);
+		}
+        
+        function info_change(ths) {
+            $(ths).parent().nextAll().children("input").each(function() {
+                if($(this).attr("name")=="brief"||
+                        $(this).attr("name")=="password"||
+                            $(this).attr("name")=="sex"){
+                    $(this).prop("disabled",false);//.removeAttr("disabled");//
+                }
+            });
+        }
+
+        function info_save(ths) {
+                //1.先完成信息的正确显示
+                //2.获取用户修改过后的 简介,密码,性别(对于头像的修改借助一个模态对话框)
+                //3.借助ajax发送到后台,通过post方法完成对于数据库相关信息的修改
+                //4.返回修改后的状态,
+                //  if正确的话,
+                //      则将修改状态再次为不可修改并将修改后的信息填充到原来的value
+                //  else:
+                //      alert("修改失败,请检查网络等")
+            var user_update_info = {};
+            $(ths).parent().nextAll().children("input").each(function() {
+
+                if($(this).attr("name")=="brief"){
+                    var brief = $(this).val();
+                    user_update_info["brief"] = brief;
+                }else if($(this).attr("name")=="password"){
+                    var password = $(this).val();
+                    user_update_info["password"] = password;
+                }else if($(this).attr("name")=="sex"){
+                    var sex = $(this).val();
+                    user_update_info["sex"] = sex;
+                }
+            });
+            user_update_info = JSON.stringify(user_update_info);
+            $.ajax({
+                url: "/user_profile/",
+                type: "POST",
+                data: {"user_update_info":user_update_info},
+                dataType: "json",
+                success:function(arg) {
+                    if(arg.status){
+                        //当返回状态是正确的时候....
+                        //else:.....
+                    }else{
+                        console.log("error");
+                    }
+                }
+            })
+        }
+
+        function submitMyHeadImg(ths){
+           //这个是在输入的文件
+           // $(ths).parent().prev().children("input");
+
+           $.ajax({
+                url: "/upload_file/",
+                type:"POST",
+                cache:false,
+                //与传统的提交不同,这里提交的是一种表单数据
+                data:new FormData($("#upload_file")[0]),
+                // dataType: "json",
+                processData: false,
+                contentType: false,
+                success:function(arg) {
+                    console.log(arg);
+                    // $("#image").attr("src","");
+                    $(ths).parent().prev().empty().html("<span style='color: coral;'>上传成功,请刷新页面</span>");
+                },
+                error:function(arg) {
+
+                    console.log(arg);
+                    console.log("aaaaaaaaaaaaaaaaa");
+                    $(ths).parent().prev().empty().html("<span style='color: red;'>上传失败,请重试</span>");
+                    // console.log(arg.responseText);
+                }
+           })
+        }
+
         $(".verify .threepart span").click(function() {
           $(".related_info2 .messageShow").toggle();
           $(".related_info2 .detail_personal_info").toggle();//.removeClass("hide");
-        })
+        });
+
+
     </script>
 
 

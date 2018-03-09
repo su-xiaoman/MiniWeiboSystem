@@ -10,17 +10,17 @@ from app01.repository.UserProfileRepository import UserProfileRepository
 
 @csrf_exempt
 def page_not_found(request):
-    return render(request, "global_handler_page/404.html")
+    return render(request, "global_handler_page/page_not_found.html")
 
 
 @csrf_exempt
 def page_error(request):
-    return render(request, "global_handler_page/500.html")
+    return render(request, "global_handler_page/page_error.html")
 
 
 @csrf_exempt
 def permission_denied(request):
-    return render(request, 'global_handler_page/403.html')
+    return render(request, 'global_handler_page/permission_denied.html')
 
 
 def index(request):
@@ -28,7 +28,7 @@ def index(request):
         username = request.session.get("username")
         print(username)
         if username:
-            if request.session.get("is_login"):
+            # if request.session.get("is_login"):
                 user_list = UserProfileRepository().get_userBasicInfo_by_username(username=username)
                 follows_num = UserProfileRepository().get_myFocusNum_by_username(username=username)
                 weibo_num = WeiboRepository().get_weiboNum_by_username(username=username)

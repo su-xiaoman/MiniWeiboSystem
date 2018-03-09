@@ -12,8 +12,12 @@ from app01.repository.CommentRepository import CommentRepository
 from app01.repository.WeiboRepository import WeiboRepository
 from app01.infrastructure.utilities.time_for_json import JsonCustomEncoder
 import io
+import os
 import json
 import datetime
+import logging
+#import pytz
+
 
 """
 from app01.repository.WeiboRepository import WeiboRepository
@@ -23,6 +27,7 @@ from django.core import serializers
 
 @csrf_exempt
 def login(request):
+
     if request.method == "POST":
         ret = {'status': False, 'message': '', 'data': None, }
         try:
@@ -69,6 +74,14 @@ def login(request):
                     ret['status'] = True
                     ret['data'] = li
                     ret['message'] = "Welcome!"
+
+                    logging.basicConfig(
+                        filename=os.path.join("static/log/", "%s_login.log" % username),
+                        format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
+                        datefmt='%Y-%m-%d %H:%M:%S %p',
+                        level=10,
+                    )
+                    logging.info("Using login function!")
 
                     return HttpResponse(json.dumps(ret))
                 else:
@@ -118,6 +131,9 @@ def register(request):
             else:#当暂未注册成功或者根本没有注册过的时候
                 if (datetime.datetime.now() - datetime.timedelta(seconds=60)) <= validity:
                     #如果在有效期之内
+                    print(validity,type(validity))
+                    print(type(datetime.datetime.now() - datetime.timedelta(seconds=60)))
+
                     if veri_code.lower() == code.lower():#验证码(不区分大小写) 一致的情况下
                         UserProfileRepository().register_newUser_with_related_info(username,email,password,datetime.datetime.now(),2)
                         EmailCodeRepository().update_my_register_status_by_email(email=email)
@@ -125,6 +141,14 @@ def register(request):
                         #设置session,以便于系统确定是谁在登陆
                         request.session['username'] = username
                         request.session['is_login'] = True
+
+                        logging.basicConfig(
+                            filename=os.path.join("static/log/", "%s_register.log" % username),
+                            format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
+                            datefmt='%Y-%m-%d %H:%M:%S %p',
+                            level=10,
+                        )
+                        logging.info("Using register function!")
                     else:
                         ret_dict['status'] = False
                         ret_dict['error'] = "邮箱验证码错误"
@@ -140,6 +164,7 @@ def register(request):
 
 @csrf_exempt
 def send_code(request):
+
     ret_dict = {'status': True, 'data': "", 'error': ""}
 
     if request.method == "POST":
@@ -188,13 +213,13 @@ def check_img_code(request):
         return HttpResponse(mstream.getvalue())
 
 
-
 @csrf_exempt
 def signup(request):
     return render(request, "user_handler_page/signup.html")
 
 @csrf_exempt
 def comment(request):
+
     if request.method == "GET":#获取评论
 
         id = request.GET.get("nid")
@@ -203,10 +228,32 @@ def comment(request):
 
         comment_info = list(comment_info)
 
+        #获取评论暂不使用日志功能，否则会产生大量的剩余文件功能
+        # username = request.session.get("username")
+        # logging.basicConfig(
+        #     filename=os.path.join("static/log", "%s_comment.log" % username),
+        #     format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
+        #     datefmt='%Y-%m-%d %H:%M:%S %p',
+        #     level=10,
+        # )
+        # logging.info("Using getcomment function!")
+
         return HttpResponse(json.dumps(comment_info,cls=JsonCustomEncoder))
 
 
-    else:
+    else:#postComments
+        #目前有一个bug，当评论的人是自己的时候，不能像评论其他人一样立刻刷新出来。
+
+        # 记录着用户的评论过程，如次数等从而补充数据库等因为评论出错等问题引起的无法记录问题
+        username = request.session.get("username")
+        logging.basicConfig(
+            filename=os.path.join("static/log/", "%s_comment.log" % username),
+            format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S %p',
+            level=10,
+        )
+        logging.info("Using comment function!")
+
         comment_date = request.POST.get("comment_related_data")
         comment_related_data = json.loads(comment_date)
 
@@ -255,6 +302,77 @@ def post_weibo(request):
         else:
             return HttpResponse("error")
 
-
+@csrf_exempt
 def user_profile(request):
-    return render(request,"user_handler_page/user_profile.html")
+    ret_dict = {'status': True, 'data': "", 'error': ""}
+    if request.method == "GET":
+
+        username = request.session['username']
+        logging.basicConfig(
+            filename=os.path.join("static/log/", "%s_user_profile.log" %username),
+            format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
+            datefmt='%Y-%m-%d %H:%M:%S %p',
+            level=10,
+        )
+        logging.info("Using gethomepage function!")
+
+        user_info = UserProfileRepository().get_userBasicInfo_by_username(username=username)
+        follows_num = UserProfileRepository().get_myFocusNum_by_username(username=username)
+        weibo_num = WeiboRepository().get_weiboNum_by_username(username=username)
+        fans_num = UserProfileRepository().get_myFansNum_by_username(username=username)
+        my_weibo = WeiboRepository().get_weibo_info_by_username(username=username)
+        personal_info = UserProfileRepository().get_detail_person_info_by_username(username=username)
+
+
+        return render(request,"user_handler_page/user_profile.html",{"user_info":user_info,
+                                                                     "follows_num":follows_num,
+                                                                     "weibo_num":weibo_num,
+                                                                     "fans_num":fans_num,
+                                                                     "my_weibo":my_weibo,
+                                                                     "personal_info":personal_info})
+    else:
+        user_update_info = request.POST.get("user_update_info")
+        user_update_info = json.loads(user_update_info)
+        # print(user_update_info,type(user_update_info))
+        #表明上面的数据已经通过某种方式从前台提交到后台了，接下来则进行数据库写入
+        brief = user_update_info["brief"]
+        sex = user_update_info["sex"]
+        password = user_update_info["password"]
+        username = request.session.get["username"]
+        if UserProfileRepository().change_person_info_by_username(username=username,
+                                                               brief=brief,
+                                                               sex=sex,
+                                                               password=password):
+            return HttpResponse(json.dumps(ret_dict))
+        else:
+            ret_dict['status'] = False
+            ret_dict['error'] = "无法完成信息修改,请刷新重试"
+            return HttpResponse(json.dumps(ret_dict))
+
+@csrf_exempt
+def upload_file(request):
+
+    if request.method == 'POST':
+        obj = request.FILES.get('head_img_change')
+        filename = os.path.join("static/img/user_pic/", obj.name)
+        username = request.session["username"]
+        try:
+            if UserProfileRepository().change_person_headImg_by_username(username=username,
+                                                                  head_img=filename):
+
+
+                print(filename)
+                #1.需要写入到数据库和保存到存储目录,主要是不知道应该怎样弄
+
+                f = open(filename, 'wb')
+                for chunk in obj.chunks():
+                    f.write(chunk)
+                f.close()
+                print("上传成功")
+                # print(type(chunk))#<class 'bytes'>
+                return HttpResponse("right!!!!!!!!!!!")
+            else:
+                print("上传失败")
+                return HttpResponse("errrrrrrrrrrrrrrror")
+        except Exception as e:
+            return HttpResponse(str(e))

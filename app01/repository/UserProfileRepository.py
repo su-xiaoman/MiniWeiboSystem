@@ -23,7 +23,9 @@ class UserProfileRepository(IUserProfileRepository):
 
         user_list = models.UserProfile.objects.filter(username=username).values('id',
                                                                             'head_img',
-                                                                            'username',)
+                                                                            'username',
+                                                                            'sex',
+                                                                            'brief',)
         return user_list
 
 
@@ -44,3 +46,28 @@ class UserProfileRepository(IUserProfileRepository):
                                           password=password,
                                           registration_date=registration_date,
                                           user=user_type, )
+
+    def get_detail_person_info_by_username(self,username):
+        personal_info = models.UserProfile.objects.filter(username=username).values("user",
+                                                                                    "username",
+                                                                                    "brief",
+                                                                                    "sex",
+                                                                                    "email",
+                                                                                    "password",
+                                                                                    "head_img",
+                                                                                    "registration_date")
+        return personal_info
+
+    def change_person_info_by_username(self,username,brief,sex,password):
+
+        if models.UserProfile.objects.filter(username=username).update(brief=brief,
+                                                                    sex=sex,
+                                                                    password=password):
+            return True
+        else:
+            return False
+    def change_person_headImg_by_username(self,username,head_img):
+        if models.UserProfile.objects.filter(username=username).update(head_img=head_img):
+            return True
+        else:
+            return False

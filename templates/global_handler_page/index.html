@@ -235,9 +235,11 @@
             <div class="personal clearfix">
                 {% for item in user_list %}
                 <div class="personal_photo">
+                    <a href="/user_profile/">
                     <img src="/{{item.head_img}}"
                         class="img-rounded"
                             style="float:left;width: 60px;height: 60px;border-radius:26px;position:relative;left:87px;top:35px;border: 1px solid white;">
+                    </a>
                 </div>
                 <div class="personal_detail">
 
@@ -288,19 +290,6 @@
 
 
     <script type="text/javascript">
-
-
-        function PreviewFile(ths){
-			 var reader = new FileReader();
-
-             reader.onload = function (e) {
-                // get loaded data and render thumbnail.
-                $("#image").attr('src',e.target.result);
-             };
-
-            // read the image file as a data URL.
-            reader.readAsDataURL(ths.files[0]);
-		}
 
 		function PostMessage(ths) {
 		    var weibo_info = {}
@@ -432,8 +421,6 @@
                         var date = v['date'];
                         var p_comment__user__username = v['p_comment__user__username'];
                         var user__username = v['user__username'];
-
-
 
                         obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
                         obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
