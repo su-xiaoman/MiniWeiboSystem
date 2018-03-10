@@ -274,6 +274,10 @@
                         <input type="text" class="form-control" value="{{person_item.sex}}" name="sex" disabled="disabled">
                     </div>
                     <div class="input-group">
+                        <span class="input-group-addon">年龄:</span>
+                        <input type="text" class="form-control" value="{{person_item.age}}" name="age" disabled="disabled">
+                    </div>
+                    <div class="input-group">
                         <span class="input-group-addon">邮箱:</span>
                         <input type="text" class="form-control" value="{{person_item.email}}" disabled="disabled">
                     </div>
@@ -411,7 +415,8 @@
         
         function info_change(ths) {
             $(ths).parent().nextAll().children("input").each(function() {
-                if($(this).attr("name")=="brief"||
+                if($(this).attr("name")=="age"||
+                    $(this).attr("name")=="brief"||
                         $(this).attr("name")=="password"||
                             $(this).attr("name")=="sex"){
                     $(this).prop("disabled",false);//.removeAttr("disabled");//
@@ -440,6 +445,9 @@
                 }else if($(this).attr("name")=="sex"){
                     var sex = $(this).val();
                     user_update_info["sex"] = sex;
+                }else if($(this).attr("name")=="age"){
+                    var age = $(this).val();
+                    user_update_info["age"] = age;
                 }
             });
             user_update_info = JSON.stringify(user_update_info);
@@ -450,8 +458,12 @@
                 dataType: "json",
                 success:function(arg) {
                     if(arg.status){
-                        //当返回状态是正确的时候....
-                        //else:.....
+                        //当更改状态成功的时候,会刷新页面,并显示改变的结果
+                        $(".info_group").empty().html("<span style='color: coral;'>信息修改成功,即将刷新页面</span>");
+                        setTimeout(function() {
+                            location.href = "/user_profile/";
+                        },2000);
+
                     }else{
                         console.log("error");
                     }
@@ -460,8 +472,6 @@
         }
 
         function submitMyHeadImg(ths){
-           //这个是在输入的文件
-           // $(ths).parent().prev().children("input");
 
            $.ajax({
                 url: "/upload_file/",
@@ -489,7 +499,7 @@
 
         $(".verify .threepart span").click(function() {
           $(".related_info2 .messageShow").toggle();
-          $(".related_info2 .detail_personal_info").toggle();//.removeClass("hide");
+          $(".related_info2 .detail_personal_info").toggle();
         });
 
 

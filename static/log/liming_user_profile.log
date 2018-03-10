@@ -34,3 +34,67 @@ ValueError: The view app01.views.user.user_profile didn't return an HttpResponse
 2018-03-09 22:26:52 PM-root-INFO-user:Using gethomepage function!
 2018-03-09 22:29:05 PM-root-INFO-user:Using gethomepage function!
 2018-03-09 22:29:26 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:02:04 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:02:15 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:02:24 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:02:33 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 341, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-03-09 23:10:31 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:10:49 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 341, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-03-09 23:17:41 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:18:02 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 346, in user_profile
+    password=password):
+TypeError: change_person_info_by_username() missing 1 required positional argument: 'age'
+2018-03-09 23:22:54 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:27:11 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:27:26 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:27:43 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:28:43 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:28:46 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:29:07 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:29:45 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:31:34 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:31:52 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:32:05 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:36:19 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:36:45 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:37:17 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:43:59 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:44:24 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:57:30 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:58:07 PM-root-INFO-user:Using gethomepage function!
+2018-03-09 23:58:17 PM-root-INFO-user:Using gethomepage function!
+2018-03-10 00:00:01 AM-root-INFO-user:Using login function!

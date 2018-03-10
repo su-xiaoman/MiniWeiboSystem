@@ -93,7 +93,7 @@
 .related_info2 .detail_personal_info{
     width:600px;
     height: 514px;
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     display: none;
 }
 .related_info2 .detail_personal_info .info_group div{

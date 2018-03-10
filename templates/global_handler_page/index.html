@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/static/css/threePart.css">
 
     <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.qqFace.js"></script>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
     <script type="text/javascript" src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -57,6 +58,34 @@
         hr{
             color: red;
 
+        }
+
+        /*.emotion{*/
+            /*width:42px;*/
+            /*height:20px;*/
+            /*!*background:url(icon.gif) no-repeat 2px 2px;*!*/
+            /*padding-left:20px;*/
+            /*cursor:pointer;*/
+        /*}*/
+        .emotion:hover{
+            background-position:2px -28px;
+        }
+
+        .qqFace{
+            margin-top:4px;
+            background:#fff;
+            padding:2px;
+            border:1px #dfe6f6 solid;
+        }
+        .qqFace table td{
+            padding:0px;
+        }
+        .qqFace table td img{
+            cursor:pointer;
+            border:1px #fff solid;
+        }
+        .qqFace table td img:hover{
+            border:1px #0066cc solid;
         }
     </style>
 </head>
@@ -148,12 +177,15 @@
         <div class="second clearfix">
             <div class="post clearfix">
                 <p id="p1">有什么新鲜事想告诉大家?</p>
-                <textarea type="text"
-                         style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;resize: none;"
-                           placeholder="Want to say something??">
+                <textarea class="input"
+                          style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;resize: none;"
+                          id="post_text"
+                          name="post_text"
+                          placeholder="Want to say something??">
                 </textarea>
                 <div class="c1">
-                    <i class="fa fa-plus-square">表情</i>
+                    <div id="show"></div>
+                    <i class="fa fa-plus-square emotion" style="cursor: pointer;">表情</i>
                 </div>
                 <div class="c2">
                     <i class="fa fa-photo">图片</i>
@@ -197,7 +229,7 @@
                         </div>
 
                         <div class="textShow">
-                            <p style="margin-left: 21px;">{{ weibo_item.text }}</p>
+                            <p id="text_show" class="text_show" style="margin-left: 21px;">{{weibo_item.text}}</p>
                         </div>
 
                         <div class="weibo_menu">
@@ -292,7 +324,7 @@
     <script type="text/javascript">
 
 		function PostMessage(ths) {
-		    var weibo_info = {}
+		    var weibo_info = {};
 
 		    var text = $(".post>textarea").val();
 		    var post_status = $(".c6 i").text();
@@ -443,6 +475,25 @@
             current_status = $(ths).text();
             $(ths).parent().prev().text(current_status);
         }
+
+        function replace_em(str){
+            str = str.replace(/\</g,'<;');
+            str = str.replace(/\>/g,'>;');
+            str = str.replace(/\n/g,'<;br/>;');
+            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/static/img/face/$1.gif" border="0" />');
+            return str;
+        }
+
+        $(function(){
+            $(".text_show").each(function() {
+                $(this).html(replace_em($(this).text()));
+            });
+
+            $('.emotion').qqFace({
+                assign:'post_text', //给输入框赋值
+                path:'/static/img/face/'    //表情图片存放的路径
+            });
+        });
 
     </script>
 
