@@ -15,6 +15,7 @@
 
     <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="/static/js/jquery.qqFace.js"></script>
+    <script type="text/javascript" src="/static/js/commons.js"></script>
     <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
     <script type="text/javascript" src="/static/plugins/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
@@ -30,7 +31,9 @@
             padding: 0;
             margin: 0;
         }
-
+        i{
+            cursor: pointer;
+        }
         body{
             background-image: url("/static/img/about_UI/skin.png");
             background-size:1366px auto;
@@ -43,10 +46,6 @@
             visibility: hidden;
             height: 0;
         }
-
-        i{
-            padding-right: 3px;
-        }
         #p1{
             margin-top: 10px;
             margin-left: 12px;
@@ -55,18 +54,6 @@
         .hide{
             display: none;
         }
-        hr{
-            color: red;
-
-        }
-
-        /*.emotion{*/
-            /*width:42px;*/
-            /*height:20px;*/
-            /*!*background:url(icon.gif) no-repeat 2px 2px;*!*/
-            /*padding-left:20px;*/
-            /*cursor:pointer;*/
-        /*}*/
         .emotion:hover{
             background-position:2px -28px;
         }
@@ -78,7 +65,7 @@
             border:1px #dfe6f6 solid;
         }
         .qqFace table td{
-            padding:0px;
+            padding:0;
         }
         .qqFace table td img{
             cursor:pointer;
@@ -87,64 +74,93 @@
         .qqFace table td img:hover{
             border:1px #0066cc solid;
         }
+        #image{
+            border: 1px solid gainsboro;
+            /*border: 1px solid black;*/
+             height: 70px;
+             width: 70px;
+             float: left;
+             border-radius: 3px;
+             margin-top: -100px;
+        }
+        #files{
+            font-size: 50px;
+            width: 800px;
+            height: 100px;
+            opacity: 0;
+            z-index: 99;
+        }
     </style>
 </head>
 <body>
 
     <!-- 头部仿汽车之家的顶部信息栏 -->
     <div class="top_info clearfix">
-    <div class="locate">
+        <div class="locate">
+        </div>
+        <div class="c0">
+            <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
+            <span class="c2">切换 <i class="caret"></i></span>
+        </div>
+        {% for item in user_list %}
+        <div class="login_register">
+
+            <span class="c3" >您好!请</span>
+            <a class="c5" href="/signup/">登录</a>
+            <span class="c3">或</span>
+            <a class="c5" href="/signup/">注册</a>
+        </div>
+        {% endfor %}
     </div>
-    <div class="c0">
-        <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
-        <span class="c2">切换 <i class="caret"></i></span>
-    </div>
-    <div class="login_register">
-        <span class="c3" >您好!请</span>
-        <a class="c5" href="/signup/">登录</a>
-        <span class="c3">或</span>
-        <a class="c5" href="/signup/">注册</a>
-    </div>
-</div>
     <!--此为第二行的菜单栏说明-->
     <div class="head_band clearfix">
         <!--此为新浪logo-->
         <div class="logo"></div>
 
-        <!--此处就有form表单或者ajax-->
+        <!--此处应该有form表单或者ajax提交到搜索页面-->
         <div class="search">
-
-            <input type="text" placeholder="大家正在搜:Taylor Swift会有多少个男朋友?" name="condition"/>
-            <button type="submit" class="fa fa-search fa-2x"></button>
-
+            <form action="/searchPage/" method="post">
+                <input type="text" placeholder="大家正在搜:Taylor Swift会有多少个男朋友?" name="condition"/>
+                <button type="submit" class="fa fa-search fa-2x"></button>
+            </form>
         </div>
 
         <!--此为几个主要菜单栏-->
         <div class="main_menu">
             <div class="linkPage">
-                <a href="javascript:void(0);"><i class="fa fa-home fa-2x"></i>&nbsp;首页</a>
-                <a href="javascript:void(0);"><i class="fa fa-youtube-play fa-2x"></i>&nbsp;视频</a>
-                <a href="javascript:void(0);"><i class="fa fa-compass fa-2x fa-fw"></i>&nbsp;发现</a>
-                <a href="javascript:void(0);"><i class="fa fa-gamepad fa-2x fa-fw"></i>&nbsp;游戏</a>
+                <a style="color: coral;" href="/index/">
+                    <i class="fa fa-home fa-2x"></i>
+                    <span>首页</span>
+                </a>
+                <a href="javascript:void(0);">
+                    <i class="fa fa-youtube-play fa-2x"></i>
+                    <span>视频</span>
+                </a>
+                <a href="javascript:void(0);">
+                    <i class="fa fa-compass fa-2x"></i>
+                    <span>发现</span>
+                </a>
+                <a href="javascript:void(0);">
+                    <i class="fa fa-gamepad fa-2x"></i>
+                    <span>游戏</span>
+                </a>
             </div>
 
             <div class="myfunction">
                 <div class="dropdown">
-                  <i class="fa fa-envelope-o fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                  <ul class="dropdown-menu" aria-labelledby="dLabel">
-                    <li>功能1</li>
-                    <li>功能2</li>
-                  </ul>
+                  <i class="fa fa-envelope-o fa-2x" data-toggle="popover" data-placement="bottom"
+                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
                 </div>
 
                 <div class="dropdown">
-                  <i class="fa fa-cog fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                  <ul class="dropdown-menu" aria-labelledby="dLabel">
-                    <li>功能3</li>
-                    <li>功能4</li>
-                  </ul>
+                  <i class="fa fa-cog fa-2x" data-toggle="popover" data-placement="bottom"
+                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
                 </div>
-                <div class="fa fa-wrench fa-2x"></div>
+
+                <div class="dropdown">
+                  <i class="fa fa-wrench fa-2x" data-toggle="popover" data-placement="bottom"
+                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
+                </div>
 
             </div>
 
@@ -165,11 +181,11 @@
             </div>
             <div class="list-group">
                 <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-heart"></i>特别关注</a>
-                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>同事</a>
-                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>同学</a>
-                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>媒体</a>
-                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>体育</a>
-                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-certificate"></i>事业</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-odnoklassniki"></i>同事</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-odnoklassniki"></i>同学</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-odnoklassniki"></i>媒体</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-odnoklassniki"></i>体育</a>
+                <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-odnoklassniki"></i>事业</a>
                 <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-user-o"></i>群微博</a>
                 <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-leaf"></i>悄悄关注</a>
             </div>
@@ -184,23 +200,34 @@
                           placeholder="Want to say something??">
                 </textarea>
                 <div class="c1">
-                    <div id="show"></div>
                     <i class="fa fa-plus-square emotion" style="cursor: pointer;">表情</i>
                 </div>
+
                 <div class="c2">
-                    <i class="fa fa-photo">图片</i>
+                    <i class="fa fa-photo" style="cursor: pointer;" data-container="body" data-toggle="popover" title="本地上传"
+                        data-placement="bottom" data-html="true"
+                        data-content='
+                            <div style="width:71px;height:71px;float:left;" id="addImage">
+                                <form id="upload_file" enctype="multipart/form-data">
+                                    <input type="file" id="files" name="head_img_change" onchange="PreviewMultipleFile(this);"
+                                            multiple="multiple"/>
+                                    <img id="image" src="/static/img/about_UI/add.png" draggable="true"/>
+                                </form>
+                            </div>
+                        '
+                        >图片</i>
                 </div>
                 <div class="c3">
-                    <i class="fa fa-film">视频</i>
+                    <i class="fa fa-film" style="cursor: pointer;">视频</i>
                 </div>
                 <div class="c4">
-                    <i class="fa fa-hashtag">话题</i>
+                    <i class="fa fa-hashtag" style="cursor: pointer;">话题</i>
                 </div>
                 <div class="c5">
-                    <i class="fa fa-star">头条文章</i>
+                    <i class="fa fa-link" style="cursor: pointer;">网页分享</i>
                 </div>
                 <div class="cMore">
-                    <i class="fa fa-bars">更多</i>
+                    <i class="fa fa-bars" style="cursor: pointer;">更多</i>
                 </div>
                 <div class="c6">
                     <div class="dropdown">
@@ -237,7 +264,6 @@
                             <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)"><i class="fa fa-comment-o" style="cursor: pointer;">评论</i></dd>
                             <dd id="ishare"><i class="fa fa-share-alt" style="cursor: pointer;">分享</i></dd>
                             <dd id="ilike"><i class="fa fa-thumbs-o-up" style="cursor: pointer;">点赞</i></dd>
-
                         </div>
 
                         <div class="commentInfo hide">
@@ -319,172 +345,14 @@
 
     </div>
 
-
-
     <script type="text/javascript">
 
-		function PostMessage(ths) {
-		    var weibo_info = {};
-
-		    var text = $(".post>textarea").val();
-		    var post_status = $(".c6 i").text();
-		    if(post_status == "公开"){
-		        var the_perm = 0;
-		    }else if(post_status == "仅自己可见"){
-		        var the_perm = 1;
-		    }else{
-		        var the_perm = 2;
-		    }
-            var perm = the_perm;
-		    var wb_type = 0;
-		    var user_id = $(".commentPlace button").attr("target");
-
-		    weibo_info["text"] = text;
-            weibo_info["user_id"] = user_id;
-            weibo_info["wb_type"] = wb_type;
-            weibo_info["perm"] = perm;
-
-            weibo_data = JSON.stringify(weibo_info);
-
-		    $.ajax({
-		        url: "/post_weibo/",
-		        type: "POST",
-		        data: {"weibo_data":weibo_data},
-                success:function(arg) {
-                    if(arg=="right"){
-                        location.href = ("/index/");
-                    }
-                    console.log(arg);
-                },
-                error:function(arg) {
-                  console.log("error");
-                }
-		    })
-		}
-
-        function ToggleCommentArea(ths) {
-
-          nid = $(ths).attr("target");
-          console.log(nid);
-
-		  $.ajax({
-		    // async :false,
-		    url: "/comment/",
-		    type: "GET",
-		    data:{"nid":nid},
-		    // dataType:"json",
-		    success:function(arg) {
-		        $(ths).parent().next().toggleClass("hide");
-                console.log("success");
-                var data_json = JSON.parse(arg);
-
-                $.each(data_json,function(k,v) {
-                    console.log(k,v);
-                    var user__head_img = v['user__head_img'];
-                    var id = v['id'];
-                    var comment = v['comment'];
-                    var p_comment__user_id = v['p_comment__user_id'];
-                    var date = v['date'];
-                    var p_comment__user__username = v['p_comment__user__username'];
-                    var user__username = v['user__username'];
-
-
-                    obj = $(ths).parent().next().find("#commentZone");
-
-                    obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
-                    obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
-                    obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
-                    obj.append("<p>"+date+"</p>");
-                    obj.append("<hr style='height: 1px;border: none;background-color: #555555;'/>")
-
-                })
-
-
-                // console.log(obj.prop("class"));
-
-		    },
-		    error:function(arg) {
-		      console.log("error");
-		      console.log(arg);
-		    }
-
-          })
-        }
-        
-        function setComment(ths) {
-            var comment_data = {};
-            //制造一个字典 里面有to_weibo,p_comment,user,comment_type,comment,data等相关信息
-
-            var comment = $(ths).prev().val();
-            var user_id = $(ths).attr("target");
-            var to_weibo_id = $(ths).attr("weibo_id");
-
-            //理论上这个值是@后面的对象 但是目前为了简单 所以采用空值代表评论根对象
-            var p_comment_id = "";
-
-            comment_data["comment"] = comment;
-            comment_data["user_id"] = user_id;
-            comment_data["to_weibo_id"] = to_weibo_id;
-            comment_data["p_comment_id"] = p_comment_id;
-
-            comment_data = JSON.stringify(comment_data);
-
-            $.ajax({
-                url: "/comment/",
-                type: "POST",
-                data: {"comment_related_data":comment_data},
-                success:function(arg) {
-
-                    console.log("success");
-
-                    var data_json = JSON.parse(arg);
-
-                    obj = $('#commentZone');
-                    obj.empty();//先删除所有评论里面的内容
-
-                    console.log("obj:"+obj);
-
-                    $.each(data_json,function(k,v) {
-                        console.log(k,v);
-                        var user__head_img = v['user__head_img'];
-                        var id = v['id'];
-                        var comment = v['comment'];
-                        var p_comment__user_id = v['p_comment__user_id'];
-                        var date = v['date'];
-                        var p_comment__user__username = v['p_comment__user__username'];
-                        var user__username = v['user__username'];
-
-                        obj.append("<p><img style=\"with:25px;height:25px;float: left;margin:15px 3px 0 3px;\" src="+"/"+user__head_img+"></p>");
-                        obj.append("<span style='color:coral;'>"+user__username+":"+"</span>");
-                        obj.append("<span style='color:red;'>"+"@"+p_comment__user__username+"  "+comment+"</span>");
-                        obj.append("<p>"+date+"</p>");
-                        obj.append("<hr style='height: 1px;border: none;background-color: #555555;'/>")
-
-                    });
-
-                    $(ths).prev().val("");
-
-                },
-                error:function(arg) {
-                  console.log("error");
-                }
-            })
-        }
-
-        function TogglePostStatus(ths) {
-            current_status = $(ths).text();
-            $(ths).parent().prev().text(current_status);
-        }
-
-        function replace_em(str){
-            str = str.replace(/\</g,'<;');
-            str = str.replace(/\>/g,'>;');
-            str = str.replace(/\n/g,'<;br/>;');
-            str = str.replace(/\[em_([0-9]*)\]/g,'<img src="/static/img/face/$1.gif" border="0" />');
-            return str;
-        }
-
         $(function(){
+
+            $('[data-toggle="popover"]').popover();
+            //.on('shown.bs.popover',function() {});
+            $('.login_register').html("<span class='c5'>欢迎你的到来</span>");
+
             $(".text_show").each(function() {
                 $(this).html(replace_em($(this).text()));
             });

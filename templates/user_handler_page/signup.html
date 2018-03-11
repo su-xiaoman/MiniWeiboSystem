@@ -7,6 +7,8 @@
   <link rel="shortcut icon" href="/static/img/about_UI/favicon.ico" />
   <link rel="bookmark" href="/static/img/about_UI/favicon.ico" type="image/x-icon"/>
 
+
+  <link rel="stylesheet" href="/static/css/top_info.css">
   <link rel="stylesheet" href="/static/plugins/bootstrap-3.3.7-dist/css/bootstrap.css">
   <link rel="stylesheet" href="/static/plugins/Font-Awesome-master/css/font-awesome.css">
   <script type="text/javascript" src="/static/js/jquery-3.2.1.js"></script>
@@ -16,7 +18,7 @@
             margin: 0;
             padding: 0;
             font-family: "Arial","Microsoft YaHei",serif;
-            }
+        }
         body{
             background-image: url("/static/img/about_UI/for_register.png");
         }
@@ -77,7 +79,23 @@
   </style>
 </head>
 <body>
-    <div style="width: 1366px;">
+    <!-- 头部仿汽车之家的顶部信息栏 -->
+    <div class="top_info clearfix">
+        <div class="locate">
+        </div>
+        <div class="c0">
+            <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
+            <span class="c2">切换 <i class="caret"></i></span>
+        </div>
+        <div class="login_register">
+            <span class="c3" >您好!请</span>
+            <a class="c5" href="/signup/">登录</a>
+            <span class="c3">或</span>
+            <a class="c5" href="/signup/">注册</a>
+        </div>
+    </div>
+
+    <div style="width: 1366px;height: auto;">
        <!--微博注册-->
        <div class="WB_signup"  id="WB_register">
             <div class="logo"></div>
@@ -160,25 +178,9 @@
 
     <script type="text/javascript">
 
-        function settime(ths,timer){
-            //设置逗留时间
-            if(timer == 0){
-                $(ths).prop("disabled",false);
-                $(ths).html("重新获取验证码");
-                return;
-            }else {
-                $(ths).prop("disabled",true);
-                $(ths).html("<i class=\"fa fa-spinner fa-pulse\"></i>已发送("+timer+"s)");
-                timer --;
-            }
-            setTimeout(function() {
-                    settime(ths,timer);
-                },1000);//过1秒执行一次左边的函数
-        }
-
         $(".addon>a").click(function() {
-            $('#WB_login').fadeToggle(1000);//.toggle(1000);//slideToggle(1000);
-            $('#WB_register').fadeToggle(1000);//.toggle(1000);//slideToggle(1000);
+            $('#WB_login').fadeToggle(0);//.toggle(1000);//slideToggle(1000);
+            $('#WB_register').fadeToggle(0);//.toggle(1000);//slideToggle(1000);
         });
 
         $("#imgCode").click(function() {
@@ -293,10 +295,10 @@
                     else{
                         var error_info = arg.message;
                         //错误的信息有几种
-                        //1.ret['message'] = "验证码错误，请重新输入！"
+                        //1.ret['message'] = "验证码错误,请重新输入！"
                         //2.ret['message'] = "用户名不存在或密码错误"
                         //3.ret['message'] = str(e)
-                        console.log(error_info)
+                        console.log(error_info);
 
                         if(error_info == "验证码错误，请重新输入"){
                             $("#WB_login #exampleInputimgCode").val("").addClass("invalid").attr("placeholder",error_info);
@@ -313,8 +315,6 @@
             })
 
         })
-
-
 
     </script>
 
