@@ -102,6 +102,9 @@
     float: left;
     margin-left: 15px;
 }
+.main_menu .myfunction .dropdown i:hover{
+    color: chocolate;
+}
 
 
 

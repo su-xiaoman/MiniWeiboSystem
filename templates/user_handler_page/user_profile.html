@@ -40,91 +40,41 @@
         visibility: hidden;
         height: 0;
     }
-    #image{
-        width:90px;
-        height:90px;
-        margin-top: 4px;
-        /*border:1px solid red;*/
-        float: left;
-        border-radius: 3px;
-    }
     hide{
         display: none;
     }
+    .modal-body{
+        height: 120px;
+        width: 120px;
+        /*border: 1px solid red;*/
+        overflow: hidden;
+    }
 
+    #files{
+        font-size: 80px;
+        width: 69px;
+        height: 66px;
+        opacity: 0;
+        /*z-index: 99;*/
+    }
+
+    #image{
+        width:120px;
+        height:120px;
+        margin-top: -83px;
+        margin-left: -18px;
+        border:1px solid red;
+        float: left;
+        border-radius: 3px;
+    }
+   .modal-body:hover{
+        border: 2px dotted orangered;
+    }
   </style>
 </head>
 <body>
-    <!-- 头部仿汽车之家的顶部信息栏 -->
-    <div class="top_info clearfix">
-        <div class="locate">
-        </div>
-        <div class="c0">
-            <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
-            <span class="c2">切换 <i class="caret"></i></span>
-        </div>
-        <div class="login_register">
-            <span class="c3" >您好!请</span>
-            <a class="c5" href="/signup/">登录</a>
-            <span class="c3">或</span>
-            <a class="c5" href="/signup/">注册</a>
-        </div>
-    </div>
-    <!--此为第二行的菜单栏说明-->
-    <div class="head_band clearfix">
-        <!--此为新浪logo-->
-        <div class="logo"></div>
-
-        <!--此处应该有form表单或者ajax提交到搜索页面-->
-        <div class="search">
-            <form action="/searchPage/" method="post">
-                <input type="text" placeholder="大家正在搜:Taylor Swift会有多少个男朋友?" name="condition"/>
-                <button type="submit" class="fa fa-search fa-2x"></button>
-            </form>
-        </div>
-
-        <!--此为几个主要菜单栏-->
-        <div class="main_menu">
-            <div class="linkPage">
-                <a style="color: coral;" href="/index/">
-                    <i class="fa fa-home fa-2x"></i>
-                    <span>首页</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-youtube-play fa-2x"></i>
-                    <span>视频</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-compass fa-2x"></i>
-                    <span>发现</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-gamepad fa-2x"></i>
-                    <span>游戏</span>
-                </a>
-            </div>
-
-            <div class="myfunction">
-                <div class="dropdown">
-                  <i class="fa fa-envelope-o fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-                <div class="dropdown">
-                  <i class="fa fa-cog fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-                <div class="dropdown">
-                  <i class="fa fa-wrench fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-            </div>
-
-        </div>
-
-</div>
+    <!--通用页面的展示-->
+    {% include "global_handler_page/directory.html"%}
 
     <div class="profile clearfix">
         {% for user_item in user_info %}
@@ -140,9 +90,8 @@
                   </div>
                   <div class="modal-body" style="height: 120px;">
                         <form id="upload_file" enctype="multipart/form-data">
-                            <div class="btn-default" style="height:20px;position: absolute;left: -10px;top: 3px;border-radius: 2px;">点击文件上传</div>
-                            <input type="file" id="files" name="head_img_change" onchange="PreviewFile(this);"
-                                    multiple style="opacity: 0;margin-top: -15px;"/>
+                            <input type="file" id="files" accept="image/jpg,image/jpeg,image/png,image/gif"
+                                        name="head_img_change" onchange="PreviewFile(this);" />
                             <img id="image" src="/static/img/about_UI/add.png" style="border: 1px solid gainsboro;" draggable="true"/>
                         </form>
                   </div>

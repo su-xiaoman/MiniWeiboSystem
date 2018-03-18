@@ -46,7 +46,7 @@
             visibility: hidden;
             height: 0;
         }
-        #p1{
+        #cPrompt{
             margin-top: 10px;
             margin-left: 12px;
             color: cornflowerblue;
@@ -75,98 +75,51 @@
             border:1px #0066cc solid;
         }
         #image{
-            border: 1px solid gainsboro;
+            /*border: 1px dotted orangered;*/
             /*border: 1px solid black;*/
              height: 70px;
              width: 70px;
              float: left;
              border-radius: 3px;
-             margin-top: -100px;
+             margin-top: -66px;
+        }
+        .addImages:hover{
+            border: 2px dotted orangered;
+            color: orangered;
         }
         #files{
             font-size: 50px;
-            width: 800px;
-            height: 100px;
+            width: 69px;
+            height: 66px;
             opacity: 0;
-            z-index: 99;
+            /*z-index: 99;*/
+        }
+        .popover-content{
+            padding: 2px;
+            max-width:218px;
+        }
+        .returnToTop{
+            width: 40px;
+            height: 40px;
+            background-color: gainsboro;
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+            text-align: center;
+            display: none;
+        }
+        .addImages{
+            float:left;
+            width:71px;
+            height:71px;
+            overflow:hidden;
+            border: 2px dotted gainsboro;
         }
     </style>
 </head>
 <body>
-
-    <!-- 头部仿汽车之家的顶部信息栏 -->
-    <div class="top_info clearfix">
-        <div class="locate">
-        </div>
-        <div class="c0">
-            <span class="c1"><i class="fa fa-location-arrow"></i>郑州</span>
-            <span class="c2">切换 <i class="caret"></i></span>
-        </div>
-        {% for item in user_list %}
-        <div class="login_register">
-
-            <span class="c3" >您好!请</span>
-            <a class="c5" href="/signup/">登录</a>
-            <span class="c3">或</span>
-            <a class="c5" href="/signup/">注册</a>
-        </div>
-        {% endfor %}
-    </div>
-    <!--此为第二行的菜单栏说明-->
-    <div class="head_band clearfix">
-        <!--此为新浪logo-->
-        <div class="logo"></div>
-
-        <!--此处应该有form表单或者ajax提交到搜索页面-->
-        <div class="search">
-            <form action="/searchPage/" method="post">
-                <input type="text" placeholder="大家正在搜:Taylor Swift会有多少个男朋友?" name="condition"/>
-                <button type="submit" class="fa fa-search fa-2x"></button>
-            </form>
-        </div>
-
-        <!--此为几个主要菜单栏-->
-        <div class="main_menu">
-            <div class="linkPage">
-                <a style="color: coral;" href="/index/">
-                    <i class="fa fa-home fa-2x"></i>
-                    <span>首页</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-youtube-play fa-2x"></i>
-                    <span>视频</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-compass fa-2x"></i>
-                    <span>发现</span>
-                </a>
-                <a href="javascript:void(0);">
-                    <i class="fa fa-gamepad fa-2x"></i>
-                    <span>游戏</span>
-                </a>
-            </div>
-
-            <div class="myfunction">
-                <div class="dropdown">
-                  <i class="fa fa-envelope-o fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-                <div class="dropdown">
-                  <i class="fa fa-cog fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-                <div class="dropdown">
-                  <i class="fa fa-wrench fa-2x" data-toggle="popover" data-placement="bottom"
-                        data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus."></i>
-                </div>
-
-            </div>
-
-        </div>
-
-</div>
+    <!--通用页面的展示-->
+    {% include "global_handler_page/directory.html"%}
     <!--此为主页面的样式显示-->
     <div class="threePart clearfix">
         <div class="bigMenu clearfix" >
@@ -192,46 +145,41 @@
         </div>
         <div class="second clearfix">
             <div class="post clearfix">
-                <p id="p1">有什么新鲜事想告诉大家?</p>
+                <p id="cPrompt">有什么新鲜事想告诉大家?</p>
                 <textarea class="input"
-                          style="width:568px;height: 70px;border: 1px solid grey;margin: 4px 14px;resize: none;"
                           id="post_text"
                           name="post_text"
-                          placeholder="Want to say something??">
-                </textarea>
-                <div class="c1">
-                    <i class="fa fa-plus-square emotion" style="cursor: pointer;">表情</i>
-                </div>
+                          placeholder="Want to say something?"
+                          onkeyup="TextStatusDetect(this);"
+                          ></textarea>
 
-                <div class="c2">
-                    <i class="fa fa-photo" style="cursor: pointer;" data-container="body" data-toggle="popover" title="本地上传"
-                        data-placement="bottom" data-html="true"
+                <div class="cEmotion"><i class="fa fa-plus-square emotion" style="cursor: pointer;">表情</i></div>
+                <div class="cPhoto">
+                    <i class="fa fa-photo" style="cursor: pointer;" data-container="body" data-toggle="popover"
+                        data-placement="bottom" data-html="true" title="本地上传"
                         data-content='
-                            <div style="width:71px;height:71px;float:left;" id="addImage">
-                                <form id="upload_file" enctype="multipart/form-data">
-                                    <input type="file" id="files" name="head_img_change" onchange="PreviewMultipleFile(this);"
-                                            multiple="multiple"/>
+                            <h6 style="text-align:center;">已经上传
+                                <span style="color:red">0</span>张,还允许
+                                <span style="color:red">9</span>张,共9张
+                            </h6>
+                            <div class="addImages">
+                                <form name="upload_weibo_img" class="upload_weibo_img" id="upload_weibo_img" enctype="multipart/form-data">
+                                    <input type="file" id="files" name="weiboImg" onchange="PreviewMultipleFile(this);"
+                                            accept="image/jpg,image/jpeg,image/png,image/gif" multiple/>
                                     <img id="image" src="/static/img/about_UI/add.png" draggable="true"/>
                                 </form>
                             </div>
                         '
                         >图片</i>
                 </div>
-                <div class="c3">
-                    <i class="fa fa-film" style="cursor: pointer;">视频</i>
-                </div>
-                <div class="c4">
-                    <i class="fa fa-hashtag" style="cursor: pointer;">话题</i>
-                </div>
-                <div class="c5">
-                    <i class="fa fa-link" style="cursor: pointer;">网页分享</i>
-                </div>
-                <div class="cMore">
-                    <i class="fa fa-bars" style="cursor: pointer;">更多</i>
-                </div>
-                <div class="c6">
+                <div class="cVideo"><i class="fa fa-film" style="cursor: pointer;">视频</i></div>
+                <div class="cTopic"><i class="fa fa-hashtag" style="cursor: pointer;">话题</i></div>
+                <div class="cShare"><i class="fa fa-link" style="cursor: pointer;">网页分享</i></div>
+                <div class="cMore"><i class="fa fa-bars" style="cursor: pointer;">更多</i></div>
+                <div class="cStatus">
                     <div class="dropdown">
-                      <i class="fa fa-angle-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">公开</i>
+                      <span>公开</span>
+                      <i class="fa fa-angle-down" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                       <ul class="dropdown-menu" aria-labelledby="dLabel">
                         <li onclick="TogglePostStatus(this);">公开</li>
                         <li onclick="TogglePostStatus(this);">仅自己可见</li>
@@ -239,13 +187,11 @@
                       </ul>
                     </div>
                 </div>
-                <div class="c7">
-                    <button onclick="PostMessage(this);">发布</button>
-                </div>
+                <div class="cSubmit"><button onclick="PostMessage(this);">发布</button></div>
             </div>
 
             <div class="messageShow  clearfix">
-                <!--从数据库中拿到数据,按照某种规则拜访,加上相关样式-->
+
                 {% for weibo_item in detail_list %}
                     <div class="show1">
                         <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
@@ -256,7 +202,16 @@
                         </div>
 
                         <div class="textShow">
-                            <p id="text_show" class="text_show" style="margin-left: 21px;">{{weibo_item.text}}</p>
+                            <p id="text_show" class="text_show" style="word-break:break-all;">{{weibo_item.text}}</p>
+                             <div id="photo_show" style="width: 350px;">
+                                 {% for photo_item in photo_list %}
+                                    {% ifequal photo_item.picture_link_id  weibo_item.id %}
+                                    <img src="/{{photo_item.picture_content}}"
+                                                style="width: 110px;height: 110px;border: 1px solid lightgrey;margin: 1px;"
+                                                    alt="noPhoto">
+                                    {% endifequal %}
+                                 {% endfor %}
+                             </div>
                         </div>
 
                         <div class="weibo_menu">
@@ -267,7 +222,6 @@
                         </div>
 
                         <div class="commentInfo hide">
-
                             <div class="commentPlace">
                                 {% for user_item in user_list%}
                                 <div class="set_myComment">
@@ -276,16 +230,12 @@
                                     <button weibo_id="{{weibo_item.id}}" target="{{user_item.id}}" onclick="setComment(this);" class="btn btn-default" style="margin: 15px;float: right;">评论</button>
                                 </div>
                                 {% endfor %}
-
                                 <div class="get_allComment" id="commentZone"> </div>
-
                             </div>
-
                         </div>
 
                     </div>
                 {% endfor%}
-
             </div>
 
         </div>
@@ -340,17 +290,20 @@
                     <span style="line-height: 48px;margin-left: 66px;">查看更多<i class="fa fa-angle-right"></i></span>
                 </div>
             </div>
-
-      </div>
+        </div>
+        <div class="returnToTop">
+            <a style="text-decoration: none;color: orangered" href="#">返回顶部</a>
+        </div>
 
     </div>
 
     <script type="text/javascript">
 
         $(function(){
+            $('.cSubmit button').prop("disabled",true);
 
-            $('[data-toggle="popover"]').popover();
-            //.on('shown.bs.popover',function() {});
+            $('[data-toggle="popover"]').popover();//.on('shown.bs.popover',function() {});
+
             $('.login_register').html("<span class='c5'>欢迎你的到来</span>");
 
             $(".text_show").each(function() {
@@ -361,6 +314,16 @@
                 assign:'post_text', //给输入框赋值
                 path:'/static/img/face/'    //表情图片存放的路径
             });
+
+            window.onscroll = function() {
+                var length = $(window).scrollTop();
+                if(length>768){
+                    $('.returnToTop').show();
+                }else {
+                    $('.returnToTop').hide();
+                }
+             }
+
         });
 
     </script>

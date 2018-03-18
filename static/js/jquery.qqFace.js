@@ -5,7 +5,7 @@
 			id : 'facebox',
 			path : 'face/',
 			assign : 'content',
-			tip : 'em_'
+			tip : 'expression_'
 		};
 		var option = $.extend(defaults, options);
 		var assign = $('#'+option.assign);
@@ -77,8 +77,9 @@ jQuery.fn.extend({
 	setCaret: function(){
 		var initSetCaret = function(){ 
 			var textObj = $(this).get(0); 
-			textObj.caretPos = document.selection.createRange().duplicate(); 
-		}; 
+			// textObj.caretPos = document.selection.createRange().duplicate();
+			// textObj.caretPos = document.select
+		};
 		$(this).click(initSetCaret).select(initSetCaret).keyup(initSetCaret); 
 	}, 
 

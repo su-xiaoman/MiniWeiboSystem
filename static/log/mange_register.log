@@ -1,0 +1,71 @@
+2018-03-17 16:12:52 PM-root-INFO-user:Using register function!
+2018-03-17 16:13:05 PM-root-INFO-user:Using gethomepage function!
+2018-03-17 16:13:14 PM-root-INFO-user:Using gethomepage function!
+2018-03-17 16:13:20 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 284, in post_weibo
+    user_id = weibo_data['user_id']
+KeyError: 'user_id'
+2018-03-17 16:13:36 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 284, in post_weibo
+    user_id = weibo_data['user_id']
+KeyError: 'user_id'
+2018-03-17 16:15:39 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 284, in post_weibo
+    user_id = weibo_data['user_id']
+KeyError: 'user_id'
+2018-03-17 16:17:06 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 284, in post_weibo
+    user_id = weibo_data['user_id']
+KeyError: 'user_id'
+2018-03-17 16:17:47 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 284, in post_weibo
+    user_id = weibo_data['user_id']
+KeyError: 'user_id'
+2018-03-17 16:36:09 PM-root-INFO-user:Using gethomepage function!
+2018-03-17 16:39:12 PM-root-INFO-user:Using gethomepage function!
+2018-03-17 16:41:17 PM-root-INFO-user:Using gethomepage function!

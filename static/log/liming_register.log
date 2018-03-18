@@ -1,0 +1,9 @@
+2018-03-17 19:40:33 PM-root-INFO-user:Using register function!
+2018-03-17 19:40:59 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:41:02 PM-root-INFO-user:Using gethomepage function!
+2018-03-17 19:41:14 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:42:00 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:42:47 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:42:58 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:47:17 PM-django.request-WARNING-base:Not Found: /None
+2018-03-17 19:47:33 PM-django.request-WARNING-base:Not Found: /None
