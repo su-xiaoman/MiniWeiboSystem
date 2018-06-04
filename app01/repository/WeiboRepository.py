@@ -40,3 +40,15 @@ class WeiboRepository(IWeiboRepository):
             return True
         else:
             return False
+
+    def judge_an_item_exists_by_id(self,id):
+        if models.Weibo.objects.filter(id=id):
+            return True
+        else:
+            return False
+
+    def delete_an_item_by_id(self,id):
+        if models.Weibo.objects.filter(id=id).delete():
+            return True
+        else:
+            return False

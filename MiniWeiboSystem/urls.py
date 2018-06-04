@@ -43,6 +43,11 @@ urlpatterns = [
     path('user_profile/',user.user_profile),
     path('upload_file/',user.upload_file),
     path('upload_weibo_img/',user.upload_weibo_img),
+    path('like/',user.like),
+    path('exit/',user.exit),
+    path('delete/',user.delete),
+
+
 
 
 ]

@@ -330,6 +330,63 @@
           $(".related_info2 .detail_personal_info").toggle();
         });
 
+        function info_change(ths) {
+            $(ths).parent().nextAll().children("input").each(function() {
+            if($(this).attr("name")=="age"||
+                $(this).attr("name")=="brief"||
+                    $(this).attr("name")=="password"||
+                        $(this).attr("name")=="sex"){
+                $(this).prop("disabled",false);//.removeAttr("disabled");//
+            }
+            });
+        }
+
+        function info_save(ths) {
+//1.先完成信息的正确显示
+//2.获取用户修改过后的 简介,密码,性别(对于头像的修改借助一个模态对话框)
+//3.借助ajax发送到后台,通过post方法完成对于数据库相关信息的修改
+//4.返回修改后的状态,
+//  if正确的话,
+//      则将修改状态再次为不可修改并将修改后的信息填充到原来的value
+//  else:
+//      alert("修改失败,请检查网络等")
+var user_update_info = {};
+$(ths).parent().nextAll().children("input").each(function() {
+
+if($(this).attr("name")=="brief"){
+    var brief = $(this).val();
+    user_update_info["brief"] = brief;
+}else if($(this).attr("name")=="password"){
+    var password = $(this).val();
+    user_update_info["password"] = password;
+}else if($(this).attr("name")=="sex"){
+    var sex = $(this).val();
+    user_update_info["sex"] = sex;
+}else if($(this).attr("name")=="age"){
+    var age = $(this).val();
+    user_update_info["age"] = age;
+}
+});
+user_update_info = JSON.stringify(user_update_info);
+$.ajax({
+url: "/user_profile/",
+type: "POST",
+data: {"user_update_info":user_update_info},
+dataType: "json",
+success:function(arg) {
+    if(arg.status){
+        //当更改状态成功的时候,会刷新页面,并显示改变的结果
+        $(".info_group").empty().html("<span style='color: coral;'>信息修改成功,即将刷新页面</span>");
+        setTimeout(function() {
+            location.href = "/user_profile/";
+        },2000);
+
+    }else{
+        console.log("error");
+    }
+}
+})
+}
 
     </script>
 

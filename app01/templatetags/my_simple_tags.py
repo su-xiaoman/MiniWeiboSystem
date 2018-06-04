@@ -4,6 +4,7 @@ __time__ = "3/8/2018"
 
 from django import template
 from django.utils.safestring import mark_safe
+from app01.repository.CommentRepository import CommentRepository
 
 register = template.Library()
 
@@ -109,3 +110,20 @@ def action_all(current_url,index):
     href = '-'.join(url_path_list)
     temp = temp %(href)
     return mark_safe(temp)
+
+@register.simple_tag
+def my_simple_time(v1, v2,v3):
+    return v1 + v2 + v3
+
+@register.simple_tag
+def likeStatus(weibo_id,username):
+    likeStatus = CommentRepository().get_likeInfo_by_weiboId(weibo_id, username)
+    print("likeState:",likeStatus)
+    if likeStatus>=1:
+        likeStatus = 1
+    else:
+        likeStatus = 0
+
+    return likeStatus
+
+

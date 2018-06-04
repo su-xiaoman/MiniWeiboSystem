@@ -70,6 +70,7 @@
         .qqFace table td img{
             cursor:pointer;
             border:1px #fff solid;
+
         }
         .qqFace table td img:hover{
             border:1px #0066cc solid;
@@ -115,11 +116,20 @@
             overflow:hidden;
             border: 2px dotted gainsboro;
         }
+        .bdsharebuttonbox{
+            background-color: gainsboro;
+            height: 38px;
+            width: 147px;
+            margin-left: -4px;
+            margin-top: -40px;
+        }
+
     </style>
 </head>
 <body>
+    {% load my_simple_tags %}
     <!--通用页面的展示-->
-    {% include "global_handler_page/directory.html"%}
+    {% include "global_handler_page/directory.html" %}
     <!--此为主页面的样式显示-->
     <div class="threePart clearfix">
         <div class="bigMenu clearfix" >
@@ -174,8 +184,12 @@
                 </div>
                 <div class="cVideo"><i class="fa fa-film" style="cursor: pointer;">视频</i></div>
                 <div class="cTopic"><i class="fa fa-hashtag" style="cursor: pointer;">话题</i></div>
-                <div class="cShare"><i class="fa fa-link" style="cursor: pointer;">网页分享</i></div>
+                <div class="cShare">
+                    <a class="fa fa-link" style="cursor: pointer;">网页分享</a>
+                </div>
+
                 <div class="cMore"><i class="fa fa-bars" style="cursor: pointer;">更多</i></div>
+
                 <div class="cStatus">
                     <div class="dropdown">
                       <span>公开</span>
@@ -194,7 +208,23 @@
 
                 {% for weibo_item in detail_list %}
                     <div class="show1">
-                        <div style="float: right;margin: 10px; color: grey;"><i class="fa fa-angle-down fa-2x"></i></div>
+                        <div style="float: right;margin: 10px; color: grey;">
+                            <div class="dropdown">
+                              <i class="fa fa-angle-down fa-2x" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+                              <ul class="dropdown-menu"
+                                    aria-labelledby="dLabel"
+                                        style="margin:-7px -91px 1px;min-width: 105px;">
+                                <li>帮上头条</li>
+                                <li>屏蔽这条微博</li>
+                                <li>屏蔽此用户</li>
+                                <li>取消关注此用户</li>
+                                <li>取消举报</li>
+                                <li weibo_id="{{weibo_item.id}}"
+                                    PostMan="{{ weibo_item.user__username}}"
+                                    onclick="DeleteMyWeibo(this);">删除微博</li>
+                              </ul>
+                            </div>
+                        </div>
                         <div class="briefShow">
                             <img src="/{{weibo_item.user__head_img}}" id="photo_identity" class="img-rounded">
                             <p style="font-weight: bold;font-size: 18px;margin-left: 60px;margin-bottom: 3px;">{{ weibo_item.user__username}}</p>
@@ -202,7 +232,7 @@
                         </div>
 
                         <div class="textShow">
-                            <p id="text_show" class="text_show" style="word-break:break-all;">{{weibo_item.text}}</p>
+                             <p id="text_show" class="text_show" style="word-break:break-all;">{{weibo_item.text}}</p>
                              <div id="photo_show" style="width: 350px;">
                                  {% for photo_item in photo_list %}
                                     {% ifequal photo_item.picture_link_id  weibo_item.id %}
@@ -215,10 +245,46 @@
                         </div>
 
                         <div class="weibo_menu">
-                            <dd id="icollect"><i class="fa fa-star-o"  style="cursor: pointer;">收藏</i></dd>
-                            <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)"><i class="fa fa-comment-o" style="cursor: pointer;">评论</i></dd>
-                            <dd id="ishare"><i class="fa fa-share-alt" style="cursor: pointer;">分享</i></dd>
-                            <dd id="ilike"><i class="fa fa-thumbs-o-up" style="cursor: pointer;">点赞</i></dd>
+                            <dd id="icollect"
+                                weibo_id="{{weibo_item.id}}"
+                                currentUser="{{item.username}}"
+                                likeStatus="{{0}}"
+                                onclick="ToggleLikeStatus(this)">
+                                <i class="fa fa-star-o">收藏</i>
+                            </dd>
+
+                            <dd id="icomment" target="{{weibo_item.id}}" onclick="ToggleCommentArea(this)">
+                                <i class="fa fa-comment-o">评论</i>
+                            </dd>
+
+                            <dd id="ishare" >
+                                <i class="fa fa-share-alt">分享</i>
+                                <div class="bdsharebuttonbox" style="opacity: 0;">
+                                    <a href="#" class="bds_more" data-cmd="more"
+                                        style="height: 38px;
+                                               width: 70px;
+                                               margin-top:0px;
+                                               margin-left: 40px;
+                                               border: 1px solid red;
+                                               overflow: hidden;">
+                                    </a>
+                                </div>
+                            </dd>
+
+                            <!--这里需要一个动态生成的点赞状态,这样意味着只能实现一次反转-->
+
+                            {% for item in user_list %}
+
+                            <dd id="ilike"
+                                weibo_id="{{weibo_item.id}}"
+                                currentUser="{{item.username}}"
+                                likeStatus="{{0}}"
+                                onclick="ToggleLikeStatus(this)">
+
+                                <i class="fa fa-thumbs-o-up">点赞</i>
+
+                            </dd>
+                            {% endfor %}
                         </div>
 
                         <div class="commentInfo hide">
@@ -229,8 +295,15 @@
                                     <input type="text" style="width: 518px;height: 30px;"/>
                                     <button weibo_id="{{weibo_item.id}}" target="{{user_item.id}}" onclick="setComment(this);" class="btn btn-default" style="margin: 15px;float: right;">评论</button>
                                 </div>
+                                <div class="sortWay">
+                                    <span>按热度</span>
+                                    <span>按时间</span>
+                                </div>
                                 {% endfor %}
-                                <div class="get_allComment" id="commentZone"> </div>
+
+                                <div class="get_allComment" id="commentZone">
+
+                                </div>
                             </div>
                         </div>
 
@@ -304,7 +377,7 @@
 
             $('[data-toggle="popover"]').popover();//.on('shown.bs.popover',function() {});
 
-            $('.login_register').html("<span class='c5'>欢迎你的到来</span>");
+            $('.login_register').html("<span class='c5'>欢迎你的到来</span><a class='c6' href='/exit/' >退出登陆</a>");
 
             $(".text_show").each(function() {
                 $(this).html(replace_em($(this).text()));
@@ -322,8 +395,15 @@
                 }else {
                     $('.returnToTop').hide();
                 }
-             }
+             };
 
+            window._bd_share_config={
+                "common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},
+                "share":{},
+                "image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到:","viewSize":"16"},
+                "selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}
+            };
+            with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
         });
 
     </script>

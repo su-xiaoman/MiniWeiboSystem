@@ -1,0 +1,403 @@
+2018-04-24 09:29:07 AM-root-INFO-user:Using login function!
+2018-04-24 09:30:40 AM-root-INFO-user:Using gethomepage function!
+2018-04-24 09:31:19 AM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 357, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-04-24 09:31:25 AM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 357, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-04-24 09:31:29 AM-root-INFO-user:Using gethomepage function!
+2018-04-24 09:31:42 AM-root-INFO-user:Using gethomepage function!
+2018-04-26 21:33:49 PM-root-INFO-user:Using login function!
+2018-04-26 21:33:56 PM-root-INFO-user:Using gethomepage function!
+2018-05-19 17:37:03 PM-root-INFO-user:Using login function!
+2018-05-19 17:41:30 PM-root-INFO-user:Using gethomepage function!
+2018-05-19 23:34:51 PM-root-INFO-user:Using login function!
+2018-05-24 16:09:34 PM-root-INFO-user:Using login function!
+2018-05-24 16:15:38 PM-root-INFO-user:Using comment function!
+2018-05-24 16:15:47 PM-root-INFO-user:Using comment function!
+2018-05-24 16:29:12 PM-root-INFO-user:Using gethomepage function!
+2018-05-24 19:20:09 PM-root-INFO-user:Using gethomepage function!
+2018-05-24 19:20:17 PM-root-INFO-user:Using gethomepage function!
+2018-05-24 19:23:56 PM-root-INFO-user:Using comment function!
+2018-05-24 19:24:48 PM-root-INFO-user:Using gethomepage function!
+2018-05-24 19:25:13 PM-root-INFO-user:Using gethomepage function!
+2018-05-24 19:26:57 PM-root-INFO-user:Using gethomepage function!
+2018-05-27 13:51:15 PM-root-INFO-user:Using login function!
+2018-05-27 22:12:15 PM-root-INFO-user:Using login function!
+2018-05-27 23:03:53 PM-root-INFO-user:Using login function!
+2018-05-27 23:17:33 PM-root-INFO-user:Using gethomepage function!
+2018-05-28 08:25:36 AM-root-INFO-user:Using login function!
+2018-05-28 14:18:54 PM-root-INFO-user:Using login function!
+2018-05-28 21:06:15 PM-root-INFO-user:Using login function!
+2018-05-28 21:07:17 PM-root-INFO-user:Using login function!
+2018-05-28 21:07:35 PM-root-INFO-user:Using login function!
+2018-05-28 21:09:57 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:07 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:08 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:08 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:08 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:08 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:09 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:09 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:09 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:09 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:09 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:10 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:10 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:10 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:10 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:16 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:19 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:10:20 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:17:54 PM-root-INFO-user:Using register function!
+2018-05-28 21:18:11 PM-django.request-ERROR-exception:Internal Server Error: /upload_file/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 390, in upload_file
+    filename = os.path.join("static/img/user_pic/", obj.name)
+AttributeError: 'NoneType' object has no attribute 'name'
+2018-05-28 21:18:26 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-28 21:22:38 PM-root-INFO-user:Using login function!
+2018-05-28 21:22:48 PM-django.request-ERROR-exception:Internal Server Error: /user_profile/
+Traceback (most recent call last):
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
+    response = get_response(request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 128, in _get_response
+    response = self.process_exception_by_middleware(e, request)
+  File "D:\Python\Python36\lib\site-packages\django\core\handlers\base.py", line 126, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 372, in user_profile
+    username = request.session.get["username"]
+TypeError: 'method' object is not subscriptable
+2018-05-30 11:09:09 AM-root-INFO-user:Using login function!
+2018-05-31 16:49:58 PM-root-INFO-user:Using login function!
+2018-05-31 16:56:56 PM-root-INFO-user:Using login function!
+2018-06-01 09:23:38 AM-root-INFO-user:Using login function!
+2018-06-01 15:44:16 PM-root-INFO-user:Using login function!
+2018-06-01 16:25:00 PM-root-INFO-user:Using login function!
+2018-06-01 16:47:39 PM-root-INFO-user:Using login function!
+2018-06-01 18:22:26 PM-root-INFO-user:Using login function!
+2018-06-02 23:45:04 PM-root-INFO-user:Using login function!

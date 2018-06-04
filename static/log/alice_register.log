@@ -1,7 +1,6 @@
-2018-03-18 10:40:00 AM-root-INFO-user:Using login function!
-2018-03-18 10:59:56 AM-root-INFO-user:Using login function!
-2018-03-19 13:56:36 PM-root-INFO-user:Using login function!
-2018-03-19 13:56:54 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
+2018-03-19 14:46:54 PM-root-INFO-user:Using register function!
+2018-03-19 14:47:35 PM-root-INFO-user:Using gethomepage function!
+2018-03-19 14:48:04 PM-django.request-ERROR-exception:Internal Server Error: /post_weibo/
 Traceback (most recent call last):
   File "D:\Python\Python36\lib\site-packages\django\core\handlers\exception.py", line 35, in inner
     response = get_response(request)
@@ -12,6 +11,5 @@ Traceback (most recent call last):
   File "D:\Python\Python36\lib\site-packages\django\views\decorators\csrf.py", line 54, in wrapped_view
     return view_func(*args, **kwargs)
   File "D:\PythonRelationalFile\MiniWeiboSystem\app01\views\user.py", line 294, in post_weibo
-    perm = weibo_data['perm']
+    permission = weibo_data['perm']
 KeyError: 'perm'
-2018-05-28 18:07:15 PM-root-INFO-user:Using login function!

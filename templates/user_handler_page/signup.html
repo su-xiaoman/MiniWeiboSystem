@@ -176,6 +176,7 @@
         </div>
     </div>
 
+
     <script type="text/javascript">
 
         $(".addon>a").click(function() {
@@ -186,6 +187,22 @@
         $("#imgCode").click(function() {
             this.src += '?';
         });
+
+        function settime(ths,timer){
+            //设置逗留时间
+            if(timer == 0){
+                $(ths).prop("disabled",false);
+                $(ths).html("重新获取验证码");
+                return;
+            }else {
+                $(ths).prop("disabled",true);
+                $(ths).html("<i class=\"fa fa-spinner fa-pulse\"></i>已发送("+timer+"s)");
+                timer --;
+            }
+            setTimeout(function() {
+                    settime(ths,timer);
+                },1000);//过1秒执行一次左边的函数
+        }
 
         $('#send_code').click(function() {
             var email = $('#exampleInputEmail1').val();
@@ -212,7 +229,7 @@
                     if(obj.status){
                         //会重新刷新页面,像render一样,感觉还是不错的
                         // location.href = "/register/";
-                        settime($('#send_code'),60);//为什么出现无法调用的情况
+                        settime($('#send_code'),60);
                         console.log("success!");
                     }
                     else{
@@ -254,14 +271,14 @@
                     console.log("-------------------------");
 
                     if(arg.status){
-                       console.log("您已成功注册微博,即将进入个人页面.");
+                       alert("您已成功注册微博,即将进入个人页面.");
                        location.href = "/index/";
                        // 状态成功之后链接到某个页面(即登陆界面登陆后进入的界面,否则输出错误信息并放到相应的位置上
                     }else{
                        console.log(arg.error);
                        //$('#send_code').html();
                        var error_info = arg.error;
-                       if(error_info=="该邮箱已经被注册，请登陆"){
+                       if(error_info=="该邮箱已经被注册,请登陆"){
                             $("#WB_register input[name='email']").val("").addClass("invalid").attr("placeholder",arg.error);
                        }else{
                            $('#exampleInputCheckCode').val("").addClass("invalid").attr("placeholder",arg.error);

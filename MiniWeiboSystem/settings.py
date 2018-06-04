@@ -92,7 +92,7 @@ DATABASES = {
     }
 }
 # Session definition here
-SESSION_ENGINE = 'django.contrib.sessions.backends.db' #默认的是数据库session，其它的参见博客
+SESSION_ENGINE = 'django.contrib.sessions.backends.db' #默认的是数据库session
 SESSION_COOKIE_NAME = "sessionid"  # Session的cookie保存在浏览器上时的key，即：sessionid＝随机字
 SESSION_COOKIE_PATH = "/"  # Session的cookie保存的路径（默认全局生效）
 SESSION_COOKIE_DOMAIN = None  # Session的cookie保存的域名（默认）

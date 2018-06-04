@@ -166,6 +166,19 @@ class IWeiboRepository:
         :param kwargs:
         :return:
         """
+    def judge_an_item_exists_by_id(self, id):
+        """
+
+        :param id:
+        :return:
+        """
+
+    def delete_an_item_by_id(self,id):
+        """
+
+        :param id:
+        :return:
+        """
 
 class ICommentRepository:
     def get_all_comments_by_weiboId(self,id):
@@ -173,11 +186,29 @@ class ICommentRepository:
 
         :return:
         """
+
     def set_one_comment_with_info(self,*args,**kwargs):
         # date id comment_type comment p_comment_id to_weibo_id user_id
         """
 
         :param id:
+        :return:
+        """
+
+    def get_likeInfo_by_weiboId(self, weibo_id, user_id):
+        """
+
+        :param weibo_id:
+        :param user_id:
+        :return:
+        """
+
+    def changeLikeStatus_with_info(self,LikeStatus,Username):
+        #修改Comment表中的相关状态
+        """
+
+        :param args:
+        :param kwargs:
         :return:
         """
 
@@ -187,6 +218,25 @@ class ITagsRepository:
 class ICategoryRepository:
     pass
 
+class IWeiboMoreRepository:
+    def upload_weiboIMG_by_weibo_id(self, weibo_id, img_path):
+        """
+
+        :param weibo_id:
+        :param img_path:
+        :return:
+        """
+    def get_weibo_info_with_public(self):
+        """
+
+        :return:
+        """
+
+    def get_weiboPhoto(self):
+        """
+
+        :return:
+        """
 
 
 # 领域模型
@@ -212,6 +262,11 @@ class Weibo(models.Model):
         (1, '转发'),
         (2, '收藏'),
     )
+    permission_choice = (
+        (0, '公开'),
+        (1, '仅自己可见'),
+        (2, '好友圈'),
+    )
     wb_type = models.IntegerField(verbose_name="微博类型", choices=wb_type_choices, default=0)
     forward_or_collect_from = models.ForeignKey('self',
                                                 related_name="forward_or_collects",
@@ -220,15 +275,10 @@ class Weibo(models.Model):
                                                 on_delete=models.CASCADE)
     user = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     text = models.CharField("微博内容", max_length=140)
-    pictures_link_id = models.CharField(verbose_name="图片连接id", max_length=128, blank=True, null=True)
-    video_link_id = models.CharField(verbose_name="视频链接id", max_length=128, blank=True, null=True)
-    perm_choice = (
-        (0, '公开'),
-        (1, '仅自己可见'),
-        (2, '好友圈'),
-    )
-    perm = models.IntegerField(verbose_name="微博权限", choices=perm_choice, default=0)
+    permission = models.IntegerField(verbose_name="微博权限", choices=permission_choice, default=0)
     date = models.DateTimeField(verbose_name="发布日期", auto_now_add=True)
+
+    # likeNumber = models.IntegerField(verbose_name="点赞数量",default=0)
 
     class Meta:
         db_table = "Weibo"
@@ -236,6 +286,24 @@ class Weibo(models.Model):
 
     def __str__(self):
         return self.text
+
+class WeiboMore(models.Model):
+    """此为微博的多媒体仓库,如图片，视频等"""
+    #id暂时使用默认自动生成，如果需要再考虑增加另外的id
+    picture_content = models.CharField(verbose_name="图片内容",max_length=128,blank=True,null=True)
+    picture_link = models.ForeignKey('Weibo',related_name="weiboPhoto",verbose_name="微博相关图片",on_delete=models.CASCADE)
+
+    #暂时屏蔽掉关于视频的功能，后期再加入
+    # video_content = models.CharField(verbose_name="视频内容", max_length=128, blank=True, null=True)
+    # video_link = models.ForeignKey('Weibo',verbose_name="微博相关视频",related_name="weiboVideo",on_delete=models.CASCADE)
+
+
+    class Meta:
+        db_table = "WeiboMore"
+        verbose_name_plural = "微博媒体仓库"
+
+    def __str__(self):
+        return self.id
 
 class Topic(models.Model):
     '''话题'''
@@ -263,10 +331,13 @@ class Category(models.Model):
 
 class Comment(models.Model):
     '''评论'''
+    comment_type_choices = (
+        (0, '评论'),
+        (1, '点赞'),
+    )  # 将评论点赞 整合在同样一张表里
     to_weibo = models.ForeignKey(Weibo, verbose_name="评论的微博", on_delete=models.CASCADE)
     p_comment = models.ForeignKey('self', null=True,blank=True,verbose_name="父级评论", related_name="child_comments", on_delete=models.CASCADE)
     user = models.ForeignKey('UserProfile', verbose_name="评论的人", on_delete=models.CASCADE)
-    comment_type_choices = ((0, '评论'), (1, '点赞'))  # 将评论点赞 整合在同样一张表里
     comment_type = models.IntegerField(choices=comment_type_choices, default=0)
     comment = models.CharField(verbose_name="评论内容", max_length=140, blank=True, null=True)
     date = models.DateTimeField(verbose_name="评论日期",auto_created=True)

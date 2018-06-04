@@ -10,6 +10,8 @@
     margin: 0 auto;
     /*border: 1px solid red;*/
     padding: 20px 0 10px 80px;
+
+    background-color: rgba(255,255,255,0.5);
 }
 .list{
     /*display: inline-block;*/

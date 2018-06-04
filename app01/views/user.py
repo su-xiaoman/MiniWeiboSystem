@@ -10,6 +10,7 @@ from app01.repository.EmailCodeRepository import EmailCodeRepository
 from app01.repository.UserProfileRepository import UserProfileRepository
 from app01.repository.CommentRepository import CommentRepository
 from app01.repository.WeiboRepository import WeiboRepository
+from app01.repository.WeiboMoreRepository import WeiboMoreRepository
 from app01.infrastructure.utilities.time_for_json import JsonCustomEncoder
 import io
 import os
@@ -24,6 +25,9 @@ from app01.repository.WeiboRepository import WeiboRepository
 from app01.infrastructure.utilities import build_comment_tree
 from django.core import serializers
 """
+def exit(request):
+    request.session.clear()#['username'] = ""
+    return HttpResponseRedirect("/signup/")
 
 @csrf_exempt
 def login(request):
@@ -218,6 +222,41 @@ def signup(request):
     return render(request, "user_handler_page/signup.html")
 
 @csrf_exempt
+def like(request):
+    if request.method == "GET":
+        #获取微博的点赞状态需要哪些信息？
+        #1.微博编号（点赞哪个微博）   2.哪个用户点赞的（因为这被认为是评论行为的一种）
+
+        weibo_id = request.GET.get("weibo_id")
+        username = request.session.get("username")
+        print("weiboId:",weibo_id)
+        print("username:",username)
+        # #信息是可以成功获取到的
+
+        likeStatus = CommentRepository().get_likeInfo_by_weiboId(weibo_id,username)
+        #通过这种方式可以获取用户是否点赞
+
+        print("likeStatus is:",likeStatus)
+
+        return HttpResponse(json.dumps(likeStatus, cls=JsonCustomEncoder))
+
+        #通过以上代码可以判断出某个用户是否已经点过赞
+
+
+    else:
+        if request.method == "POST":
+            username = request.session.get("username")
+            likeStatus = int(request.POST.get("status"))
+
+            print(likeStatus,type(likeStatus))
+            print(username,type(username))
+
+            CommentRepository().changeLikeStatus_with_info(likeStatus,username)
+
+            return HttpResponse("success")
+        #通过给出需求从而将数据库数据按照相应的方法
+
+@csrf_exempt
 def comment(request):
 
     if request.method == "GET":#获取评论
@@ -225,18 +264,7 @@ def comment(request):
         id = request.GET.get("nid")
 
         comment_info = CommentRepository().get_all_comments_by_weiboId(id)
-
         comment_info = list(comment_info)
-
-        #获取评论暂不使用日志功能，否则会产生大量的剩余文件功能
-        # username = request.session.get("username")
-        # logging.basicConfig(
-        #     filename=os.path.join("static/log", "%s_comment.log" % username),
-        #     format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
-        #     datefmt='%Y-%m-%d %H:%M:%S %p',
-        #     level=10,
-        # )
-        # logging.info("Using getcomment function!")
 
         return HttpResponse(json.dumps(comment_info,cls=JsonCustomEncoder))
 
@@ -246,13 +274,6 @@ def comment(request):
 
         # 记录着用户的评论过程，如次数等从而补充数据库等因为评论出错等问题引起的无法记录问题
         username = request.session.get("username")
-        logging.basicConfig(
-            filename=os.path.join("static/log/", "%s_comment.log" % username),
-            format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S %p',
-            level=10,
-        )
-        logging.info("Using comment function!")
 
         comment_date = request.POST.get("comment_related_data")
         comment_related_data = json.loads(comment_date)
@@ -280,27 +301,70 @@ def comment(request):
         else:
             return HttpResponse("false")
 
+@csrf_exempt
+def delete(request):
+
+    ret_dict = {'status': True, 'message': "", 'error': ""}
+    if request.method == "POST":
+
+        username = request.session.get("username")
+
+        weibo_data = request.POST.get("weibo_data")
+        weibo_data = json.loads(weibo_data)
+
+        postMan = weibo_data['postMan']
+        weiboId = weibo_data['weiboId']
+
+        print(weiboId,postMan,username)#可以正确的打印
+        #1.在数据库中删除掉，第二将相应信息提示出来
+        if(postMan == username):
+            if WeiboRepository().delete_an_item_by_id(weiboId):
+                ret_dict['message'] = "微博删除成功"
+            else:
+                ret_dict['status'] = False
+                ret_dict['error'] = "请检查网络问题或其它问题"
+        else:
+            ret_dict['status'] = False
+            ret_dict['error'] = "无法完成删除，因为这并非你的微博"
+
+        return HttpResponse(json.dumps(ret_dict))
+
 
 @csrf_exempt
 def post_weibo(request):
     if request.method == "POST":
-        weibo_data = request.POST.get("weibo_data")
-        weibo_data = json.loads(weibo_data)
-        print(weibo_data, type(weibo_data))
+        ret = {"status":False,"messages":None,"data":None}
 
+        weibo_data = json.loads(request.POST.get("weibo_data"))
         text = weibo_data['text']
         user_id = weibo_data['user_id']
         wb_type = weibo_data['wb_type']
-        perm = weibo_data['perm']
+        permission = weibo_data['permission']
 
-        if WeiboRepository().set_one_weibo_with_info(date=datetime.datetime.now(),
+        print(text,user_id,wb_type,permission)
+
+        #生成相关主键
+        id = commons.generate_primaryKey()
+        flag = True
+        while flag:
+            if WeiboRepository().judge_an_item_exists_by_id(id=id):
+                id = commons.generate_primaryKey()
+            else:
+                flag = False
+
+        if WeiboRepository().set_one_weibo_with_info(id=id,
+                                                     date=datetime.datetime.now(),
                                                      text=text,
                                                      user_id=user_id,
                                                      wb_type=wb_type,
-                                                     perm=perm,):
-            return HttpResponse("right")
+                                                     permission=permission,):
+            ret['status'] = True
+            ret['message'] = "微博创建成功"
+            ret['data'] = {"id":id}
+            return HttpResponse(json.dumps(ret))
         else:
-            return HttpResponse("error")
+            ret['message'] = "微博创建失败"
+            return HttpResponse(json.dumps(ret))
 
 @csrf_exempt
 def user_profile(request):
@@ -308,13 +372,6 @@ def user_profile(request):
     if request.method == "GET":
 
         username = request.session['username']
-        logging.basicConfig(
-            filename=os.path.join("static/log/", "%s_user_profile.log" %username),
-            format='%(asctime)s-%(name)s-%(levelname)s-%(module)s:%(message)s',
-            datefmt='%Y-%m-%d %H:%M:%S %p',
-            level=10,
-        )
-        logging.info("Using gethomepage function!")
 
         user_info = UserProfileRepository().get_userBasicInfo_by_username(username=username)
         follows_num = UserProfileRepository().get_myFocusNum_by_username(username=username)
@@ -338,7 +395,8 @@ def user_profile(request):
         brief = user_update_info["brief"]
         sex = user_update_info["sex"]
         password = user_update_info["password"]
-        username = request.session.get["username"]
+        # username = request.session.get["username"]
+        username = request.session['username']
         if UserProfileRepository().change_person_info_by_username(username=username,
                                                                brief=brief,
                                                                sex=sex,
@@ -353,26 +411,62 @@ def user_profile(request):
 def upload_file(request):
 
     if request.method == 'POST':
+        ret = {"status": False, "messages": None, "data": None}
+
         obj = request.FILES.get('head_img_change')
         filename = os.path.join("static/img/user_pic/", obj.name)
         username = request.session["username"]
         try:
             if UserProfileRepository().change_person_headImg_by_username(username=username,
                                                                   head_img=filename):
-
-
                 print(filename)
-                #1.需要写入到数据库和保存到存储目录,主要是不知道应该怎样弄
 
                 f = open(filename, 'wb')
                 for chunk in obj.chunks():
                     f.write(chunk)
                 f.close()
-                print("上传成功")
-                # print(type(chunk))#<class 'bytes'>
-                return HttpResponse("right!!!!!!!!!!!")
+
+                ret['status'] = True
+                ret['message'] = "上传成功"
             else:
-                print("上传失败")
-                return HttpResponse("errrrrrrrrrrrrrrror")
+
+                ret['message'] = "上传失败"
+            return HttpResponse(json.dumps(ret))
+
         except Exception as e:
-            return HttpResponse(str(e))
+            ret['message'] = str(e)
+            return HttpResponse(json.dumps(ret))
+
+@csrf_exempt
+def upload_weibo_img(request):
+    if request.method == 'POST':
+        ret = {"status": False, "messages": None, "data": None}
+
+        pictures = request.FILES.get('weiboImg')
+        weibo_id = request.POST.get("weibo_id")
+        print(pictures.name,weibo_id)
+        # return HttpResponse("ok");
+        filename = os.path.join("static/img/user_pic/", pictures.name)
+
+        try:
+            if WeiboMoreRepository().upload_weiboIMG_by_weibo_id(weibo_id=weibo_id,
+                                                                 img_path=filename):
+                print(filename)
+
+                f = open(filename, 'wb')
+                for chunk in pictures.chunks():
+                    f.write(chunk)
+                f.close()
+
+                ret['status'] = True
+                ret['message'] = "上传成功"
+            else:
+
+                ret['message'] = "上传失败"
+            return HttpResponse(json.dumps(ret))
+
+        except Exception as e:
+            ret['message'] = str(e)
+            return HttpResponse(json.dumps(ret))
+
+
